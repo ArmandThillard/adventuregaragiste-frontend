@@ -1,12 +1,53 @@
-.header{
-    display:grid;
-    grid-template-columns:25%25%30%20%;
-}
-.main{
-    display:grid;
-    grid-template-columns:20%80%;
-}
-.product{
-    display:grid;
-    grid-template-columns:1fr1fr;
-}
+.container {
+    display: grid; 
+    grid-template-columns: 0.6fr 1.2fr 1.2fr; 
+    grid-template-rows: 0.6fr 1.4fr 1fr; 
+    gap: 0px 0px; 
+  }
+  .central {
+    display: grid; 
+    grid-template-columns: 1.5fr 0.1fr 1.5fr; 
+    grid-template-rows: 1fr 1fr 1fr; 
+    gap: 0px 0px; 
+    grid-template-areas: 
+      "one . four"
+      "two . five"
+      "three . six"; 
+    grid-area: 2 / 2 / 4 / 4; 
+  }
+  .one {
+    display: grid; 
+    grid-template-columns: 1.2fr 0.9fr 0.9fr; 
+    grid-template-rows: 1fr 1fr 1fr; 
+    gap: 0px 0px; 
+    grid-template-areas: 
+      "logo1 money1 money1"
+      "logo1 number1 time1"
+      ". . ."; 
+    grid-area: one; 
+  }
+  
+  .logo1 { grid-area: logo1; }
+  .money1 { grid-area: money1; }
+  .number1 { grid-area: number1; }
+  .time1 { grid-area: time1; }
+  .two { grid-area: two; }
+  .three { grid-area: three; }
+  .four { grid-area: four; }
+  .five { grid-area: five; }
+  .six { grid-area: six; }
+  .left { grid-area: 1 / 1 / 4 / 2; }
+  .header {
+    display: grid; 
+    grid-template-columns: 1.3fr 0.7fr 1fr; 
+    grid-template-rows: 1fr 1fr 1fr; 
+    gap: 0px 0px; 
+    grid-template-areas: 
+      "money buy ."
+      "money buy ."
+      ". . ."; 
+    grid-area: 1 / 2 / 2 / 4; 
+  }
+  .money { grid-area: money; }
+  .buy { grid-area: buy; }
+  .logo { grid-area: 1 / 1 / 2 / 2; }
