@@ -6,5 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'adventuregaragiste-frontend';
+  title = 'adventuregaragiste-frontend'
+  server= "http://localhost:8081/"
+  user= ""
 }
