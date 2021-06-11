@@ -1,172 +1,40 @@
 .container {
-    display: grid;
-    grid-template-columns: 0.6fr 1.2fr 1.2fr;
-    grid-template-rows: 0.6fr 1.4fr 1fr;
-    gap: 0px 0px;
-    grid-auto-flow: row;
-  }
-  
-  .central {
-    display: grid;
-    grid-template-columns: 1.5fr 0.1fr 1.5fr;
-    grid-template-rows: 1fr 1fr 1fr;
-    gap: 0px 0px;
-    grid-auto-flow: row;
-    grid-template-areas:
-      "one . four"
-      "two . five"
-      "three . six";
-    grid-area: 2 / 2 / 4 / 4;
-  }
-  
-  .one {
-    display: grid;
-    grid-template-columns: 1.2fr 0.9fr 0.9fr;
-    grid-template-rows: 1fr 1fr 1fr;
-    gap: 0px 0px;
-    grid-auto-flow: row;
-    grid-template-areas:
-      "logo1 money1 money1"
-      "logo1 number1 time1"
-      ". . .";
-    grid-area: one;
-  }
-  
-  .logo1 { grid-area: logo1; }
-  
-  .money1 { grid-area: money1; }
-  
-  .number1 { grid-area: number1; }
-  
-  .time1 { grid-area: time1; }
-  
-  .two {
-    display: grid;
-    grid-template-columns: 1.2fr 0.9fr 0.9fr;
-    grid-template-rows: 1fr 1fr 1fr;
-    gap: 0px 0px;
-    grid-auto-flow: row;
-    grid-template-areas:
-      "logo2 money2 money2"
-      "logo2 number2 time2"
-      ". . .";
-    grid-area: two;
-  }
-  
-  .logo2 { grid-area: logo2; }
-  
-  .money2 { grid-area: money2; }
-  
-  .number2 { grid-area: number2; }
-  
-  .time2 { grid-area: time2; }
-  
-  .three {
-    display: grid;
-    grid-template-columns: 1.2fr 0.9fr 0.9fr;
-    grid-template-rows: 1fr 1fr 1fr;
-    gap: 0px 0px;
-    grid-auto-flow: row;
-    grid-template-areas:
-      "logo3 money3 money3"
-      "logo3 number3 time3"
-      ". . .";
-    grid-area: three;
-  }
-  
-  .logo3 { grid-area: logo3; }
-  
-  .money3 { grid-area: money3; }
-  
-  .number3 { grid-area: number3; }
-  
-  .time3 { grid-area: time3; }
-  
-  .four {
-    display: grid;
-    grid-template-columns: 1.2fr 0.9fr 0.9fr;
-    grid-template-rows: 1fr 1fr 1fr;
-    gap: 0px 0px;
-    grid-auto-flow: row;
-    grid-template-areas:
-      "logo4 money4 money4"
-      "logo4 number4 time4"
-      ". . .";
-    grid-area: four;
-  }
-  
-  .logo4 { grid-area: logo4; }
-  
-  .money4 { grid-area: money4; }
-  
-  .number4 { grid-area: number4; }
-  
-  .time4 { grid-area: time4; }
-  
-  .five {
-    display: grid;
-    grid-template-columns: 1.2fr 0.9fr 0.9fr;
-    grid-template-rows: 1fr 1fr 1fr;
-    gap: 0px 0px;
-    grid-auto-flow: row;
-    grid-template-areas:
-      "logo5 money5 money5"
-      "logo5 number5 time5"
-      ". . .";
-    grid-area: five;
-  }
-  
-  .logo5 { grid-area: logo5; }
-  
-  .money5 { grid-area: money5; }
-  
-  .number5 { grid-area: number5; }
-  
-  .time5 { grid-area: time5; }
-  
-  .six {
-    display: grid;
-    grid-template-columns: 1.2fr 0.9fr 0.9fr;
-    grid-template-rows: 1fr 1fr 1fr;
-    gap: 0px 0px;
-    grid-auto-flow: row;
-    grid-template-areas:
-      "logo6 money6 money6"
-      "logo6 number6 time6"
-      ". . .";
-    grid-area: six;
-  }
-  
-  .logo6 { grid-area: logo6; }
-  
-  .money6 { grid-area: money6; }
-  
-  .number6 { grid-area: number6; }
-  
-  .time6 { grid-area: time6; }
-  
-  .left { grid-area: 1 / 1 / 4 / 2; }
-  
-  .header {
-    display: grid;
-    grid-template-columns: 1.3fr 0.7fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
-    gap: 0px 0px;
-    grid-auto-flow: row;
-    grid-template-areas:
-      "money buy id"
-      "money buy id"
-      ". . .";
-    grid-area: 1 / 2 / 2 / 4;
-  }
-  
-  .money { grid-area: money; }
-  
-  .buy { grid-area: buy; }
-  
-  .id { grid-area: id; }
-  
-  .logo { grid-area: 1 / 1 / 2 / 2; }
-  
-  .bandeau { grid-area: 2 / 1 / 4 / 2; }
-  
+  display: grid;
+  grid-template-columns: 0.6fr 1.2fr 1.2fr;
+  grid-template-rows: 0.6fr 1.4fr 1fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+}
+
+.central {
+  display: grid;
+  grid-template-columns: 1.5fr 0.1fr 1.5fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    "1 . 4"
+    "2 . 5"
+    "3 . 6";
+  grid-area: 2 / 2 / 4 / 4;
+}
+
+.money {
+  grid-area: money;
+}
+
+.buy {
+  grid-area: buy;
+}
+
+.id {
+  grid-area: id;
+}
+
+.logo {
+  grid-area: 1 / 1 / 2 / 2;
+}
+
+.bandeau {
+  grid-area: 2 / 1 / 4 / 2;
+}

@@ -1,41 +1,11 @@
 <div class="container">
   <div class="central">
-    <div class="one">
-      <div class="logo1">logo</div>
-      <div class="money1"></div>
-      <div class="number1"></div>
-      <div class="time1"></div>
-    </div>
-    <div class="two">
-      <div class="logo2">logo</div>
-      <div class="money2"></div>
-      <div class="number2"></div>
-      <div class="time2"></div>
-    </div>
-    <div class="three">
-      <div class="logo3">logo</div>
-      <div class="money3"></div>
-      <div class="number3"></div>
-      <div class="time3"></div>
-    </div>
-    <div class="four">
-      <div class="logo4">logo</div>
-      <div class="money4"></div>
-      <div class="number4"></div>
-      <div class="time4"></div>
-    </div>
-    <div class="five">
-      <div class="logo5">logo</div>
-      <div class="money5"></div>
-      <div class="number5"></div>
-      <div class="time5"></div>
-    </div>
-    <div class="six">
-      <div class="logo6">logo</div>
-      <div class="money6"></div>
-      <div class="number6"></div>
-      <div class="time6"></div>
-    </div>
+    <app-product
+      [prod]="p"
+      class="product col-md-6"
+      [server]="server"
+      *ngFor="let p of world.products.product"
+    ></app-product>
   </div>
   <div class="left"></div>
   <div class="header">
@@ -43,6 +13,15 @@
     <div class="buy"></div>
     <div class="id"></div>
   </div>
-  <div class="logo">logo</div>
-  <div class="bandeau">boutons</div>
+  <div class="logo">
+    <span><img [attr.src]="server + world.logo" /></span>
+    <span id="worldname">{{ world.name }}</span>
+  </div>
+  <div class="bandeau">
+    <button>Unlocks</button>
+    <button>Cash Upgrades</button>
+    <button>Angel Upgrades</button>
+    <button>Managers</button>
+    <button>Investors</button>
+  </div>
 </div>

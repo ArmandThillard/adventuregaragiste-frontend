@@ -1,0 +1,28 @@
+.product {
+  display: grid;
+  grid-template-columns: 1.2fr 0.9fr 0.9fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    "logo money money"
+    "logo number time"
+    ". . .";
+  grid-area: one;
+}
+
+.logo {
+  grid-area: logo;
+}
+
+.money {
+  grid-area: money;
+}
+
+.number {
+  grid-area: number;
+}
+
+.time {
+  grid-area: time;
+}
