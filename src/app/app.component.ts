@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { RestserviceService } from './restservice.service';
-import { World, Pallier, Product } from './world';
+import { World } from './world';
 
 @Component({
   selector: 'app-root',

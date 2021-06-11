@@ -9,6 +9,7 @@ import { Product } from 'src/app/world';
 export class ProductComponent implements OnInit {
   private _product: Product;
   private _server: string;
+  progressBarValue: number;
 
   constructor() {}
 
@@ -28,6 +29,10 @@ export class ProductComponent implements OnInit {
 
   get server() {
     return this._server;
+  }
+
+  startFabrication() {
+    console.log('clicked');
   }
 
   ngOnInit(): void {}
