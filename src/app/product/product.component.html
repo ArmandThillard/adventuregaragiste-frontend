@@ -1,6 +1,11 @@
 <div class="logo">
-  <img [attr.src]="server + product.logo" (click)="startFabrication()" />
+  <img
+    class="img"
+    [attr.src]="server + product.logo"
+    (click)="startFabrication()"
+  />
 </div>
+
 <div class="money">{{ product.cout }}</div>
 <div class="number">{{ product.quantite }}</div>
 <div class="time">{{ product.vitesse }}</div>

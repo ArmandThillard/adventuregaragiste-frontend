@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Product } from 'src/app/world';
 
 @Component({
@@ -9,7 +9,10 @@ import { Product } from 'src/app/world';
 export class ProductComponent implements OnInit {
   private _product: Product;
   private _server: string;
+  private _multiplier: string;
   progressBarValue: number;
+  lastUpdate: number;
+  private _money: number;
 
   constructor() {}
 
@@ -31,9 +34,46 @@ export class ProductComponent implements OnInit {
     return this._server;
   }
 
-  startFabrication() {
-    console.log('clicked');
+  @Input()
+  set multiplier(value: string) {
+    this._multiplier = value;
+    // if (this._multiplier && this.product) this.calcMaxCanBuy();
   }
 
-  ngOnInit(): void {}
+  @Input()
+  set money(value: number) {
+    this._money = value;
+  }
+
+  @Output() notifyProduction: EventEmitter<Product> =
+    new EventEmitter<Product>();
+
+  calcScore() {
+    if (this._product.timeleft !== 0) {
+      this._product.timeleft -= Date.now() - this.lastUpdate;
+      if (this._product.timeleft <= 0) {
+        // On prévient le composant parent que ce produit a généré son revenu
+        this.notifyProduction.emit(this._product);
+        // Réinitialiser les variables
+        this._product.timeleft = 0;
+        this.progressBarValue = 0;
+      } else {
+        this.progressBarValue =
+          ((this._product.vitesse - this._product.timeleft) /
+            this._product.vitesse) *
+          100;
+      }
+    }
+  }
+
+  startFabrication() {
+    this._product.timeleft = this._product.vitesse;
+    this.lastUpdate = Date.now();
+  }
+
+  ngOnInit(): void {
+    setInterval(() => {
+      this.calcScore();
+    }, 100);
+  }
 }

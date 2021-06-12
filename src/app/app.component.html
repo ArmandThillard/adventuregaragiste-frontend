@@ -2,15 +2,22 @@
   <div class="central">
     <app-product
       [prod]="p"
-      class="product col-md-6"
       [server]="server"
+      [multiplier]="multiplier"
+      [money]="world.money"
+      class="product col-md-6"
       *ngFor="let p of world.products.product"
+      (notifyProduction)="onProductionDone($event)"
     ></app-product>
   </div>
   <div class="left"></div>
   <div class="header">
-    <div class="money"></div>
-    <div class="buy"></div>
+    <div class="money">{{ world.money }}</div>
+    <div class="buy">
+      <button mat-raised-button (click)="nextMultiplier()">
+        {{ multiplier }}
+      </button>
+    </div>
     <div class="id"></div>
   </div>
   <div class="logo">
@@ -18,10 +25,22 @@
     <span id="worldname">{{ world.name }}</span>
   </div>
   <div class="bandeau">
-    <button>Unlocks</button>
-    <button>Cash Upgrades</button>
-    <button>Angel Upgrades</button>
-    <button>Managers</button>
-    <button>Investors</button>
+    <ul>
+      <li>
+        <button mat-raised-button color="primary">Unlocks</button>
+      </li>
+      <li>
+        <button mat-raised-button>Cash Upgrades</button>
+      </li>
+      <li>
+        <button mat-raised-button>Angel Upgrades</button>
+      </li>
+      <li>
+        <button mat-raised-button>Managers</button>
+      </li>
+      <li>
+        <button mat-raised-button>Investors</button>
+      </li>
+    </ul>
   </div>
 </div>

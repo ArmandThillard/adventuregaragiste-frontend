@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { RestserviceService } from './restservice.service';
-import { World } from './world';
+import { World, Product } from './world';
 
 @Component({
   selector: 'app-root',
@@ -10,6 +10,8 @@ import { World } from './world';
 export class AppComponent {
   world: World = new World();
   server: string;
+  multiplier = 'x1';
+  multiplierValues = ['x1', 'x10', 'x100', 'xMax'];
 
   title = 'adventuregaragiste-frontend';
 
@@ -18,5 +20,19 @@ export class AppComponent {
     service.getWorld().then((world) => {
       this.world = world;
     });
+  }
+
+  nextMultiplier() {
+    let currentMultiplierIndex = this.multiplierValues.indexOf(this.multiplier);
+    let nextMultiplierIndex = currentMultiplierIndex + 1;
+    if (this.multiplierValues.length === nextMultiplierIndex) {
+      nextMultiplierIndex = 0;
+    }
+    this.multiplier = this.multiplierValues[nextMultiplierIndex];
+  }
+
+  onProductionDone(product: Product) {
+    this.world.money += product.revenu;
+    this.world.score += product.revenu;
   }
 }
