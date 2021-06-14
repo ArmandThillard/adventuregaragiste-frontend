@@ -18,7 +18,13 @@
         {{ multiplier }}
       </button>
     </div>
-    <div class="id"></div>
+    <div class="id">
+      <input
+        type="text"
+        [(ngModel)]="username"
+        (change)="onUsernameChanged()"
+      />
+    </div>
   </div>
   <div class="logo">
     <span><img [attr.src]="server + world.logo" /></span>

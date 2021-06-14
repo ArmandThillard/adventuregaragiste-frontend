@@ -8,6 +8,7 @@ import { ProductComponent } from './product/product.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatButtonModule } from '@angular/material/button';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [AppComponent, ProductComponent],
@@ -18,6 +19,7 @@ import { MatButtonModule } from '@angular/material/button';
     HttpClientModule,
     MatProgressBarModule,
     MatButtonModule,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -12,6 +12,7 @@ export class AppComponent {
   server: string;
   multiplier = 'x1';
   multiplierValues = ['x1', 'x10', 'x100', 'xMax'];
+  username: string;
 
   title = 'adventuregaragiste-frontend';
 
@@ -20,6 +21,13 @@ export class AppComponent {
     service.getWorld().then((world) => {
       this.world = world;
     });
+    this.username = localStorage.getItem('username');
+  }
+
+  onUsernameChanged() {
+    localStorage.setItem('username', this.username);
+    this.service.user = this.username;
+    console.log(this.username);
   }
 
   nextMultiplier() {
