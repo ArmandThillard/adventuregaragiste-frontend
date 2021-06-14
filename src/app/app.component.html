@@ -1,31 +1,4 @@
 <div class="container">
-  <div class="central">
-    <app-product
-      [prod]="p"
-      [server]="server"
-      [multiplier]="multiplier"
-      [money]="world.money"
-      class="product col-md-6"
-      *ngFor="let p of world.products.product"
-      (notifyProduction)="onProductionDone($event)"
-    ></app-product>
-  </div>
-  <div class="left"></div>
-  <div class="header">
-    <div class="money">{{ world.money }}</div>
-    <div class="buy">
-      <button mat-raised-button (click)="nextMultiplier()">
-        {{ multiplier }}
-      </button>
-    </div>
-    <div class="id">
-      <input
-        type="text"
-        [(ngModel)]="username"
-        (change)="onUsernameChanged()"
-      />
-    </div>
-  </div>
   <div class="logo">
     <span><img [attr.src]="server + world.logo" /></span>
     <span id="worldname">{{ world.name }}</span>
@@ -49,4 +22,35 @@
       </li>
     </ul>
   </div>
+
+  
+  
+  <div class="central">
+    <app-product
+      [prod]="p"
+      [server]="server"
+      [multiplier]="multiplier"
+      [money]="world.money"
+      class="product col-md-6"
+      *ngFor="let p of world.products.product"
+      (notifyProduction)="onProductionDone($event)"
+    ></app-product>
+  </div>
+  <div class="left"></div>
+
+  <div class="header">
+    <span>{{ world.money }}</span>
+    <span><input
+      type="text"
+      [(ngModel)]="username"
+      (change)="onUsernameChanged()"
+    /></span>
+    <button mat-raised-button (click)="nextMultiplier()" style="float: right;">
+      {{ multiplier }}
+    </button>
+       
+    
+  </div>
+  
+  
 </div>

@@ -1,40 +1,37 @@
 .container {
   display: grid;
-  grid-template-columns: 0.6fr 1.2fr 1.2fr;
-  grid-template-rows: 0.6fr 1.4fr 1fr;
-  gap: 0px 0px;
-  grid-auto-flow: row;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 10px;
+  grid-auto-rows: minmax(100px, auto);
 }
 
-.central {
-  display: grid;
-  grid-template-columns: 1.5fr 0.1fr 1.5fr;
-  grid-template-rows: 1fr 1fr 1fr;
-  gap: 0px 0px;
-  grid-auto-flow: row;
-  grid-template-areas:
-    "1 . 4"
-    "2 . 5"
-    "3 . 6";
-  grid-area: 2 / 2 / 4 / 4;
-}
+.central {  
+  grid-column: 2 / 3 ;
+  grid-row: 2;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-items: stretch;
+    align-items: stretch;
+    column-gap: 20px;
+    row-gap: 20px;
+  }
 
-.money {
-  grid-area: money;
-}
-
-.buy {
-  grid-area: buy;
-}
-
-.id {
-  grid-area: id;
-}
 
 .logo {
   grid-area: 1 / 1 / 2 / 2;
 }
 
 .bandeau {
-  grid-area: 2 / 1 / 4 / 2;
+  grid-column: 1;
+  grid-row: 2;
+  
 }
+
+.header {
+  grid-column: 2 / 3 ;
+  grid-row: 1;
+  
+}
+
+
+
