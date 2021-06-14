@@ -27,7 +27,7 @@ export class AppComponent {
   onUsernameChanged() {
     localStorage.setItem('username', this.username);
     this.service.user = this.username;
-    console.log(this.username);
+    this.service.getWorld();
   }
 
   nextMultiplier() {
