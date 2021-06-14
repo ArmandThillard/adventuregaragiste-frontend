@@ -5,10 +5,12 @@
     (click)="startFabrication()"
   />
 </div>
-
 <div class="money">{{ product.cout }}</div>
 <div class="number">{{ product.quantite }}</div>
 <div class="time">{{ product.vitesse }}</div>
+<button mat-raised-button (click)="buy()">
+  Buy x{{ nbCanBuy }} : {{ neededMoney }}
+</button>
 <mat-progress-bar
   class="progressbar"
   [value]="progressBarValue"

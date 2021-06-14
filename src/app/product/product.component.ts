@@ -13,6 +13,8 @@ export class ProductComponent implements OnInit {
   progressBarValue: number;
   lastUpdate: number;
   private _money: number;
+  neededMoney: number;
+  nbCanBuy: number;
 
   constructor() {}
 
@@ -37,7 +39,7 @@ export class ProductComponent implements OnInit {
   @Input()
   set multiplier(value: string) {
     this._multiplier = value;
-    // if (this._multiplier && this.product) this.calcMaxCanBuy();
+    if (this._multiplier && this.product) this.calcMaxCanBuy();
   }
 
   @Input()
@@ -65,6 +67,45 @@ export class ProductComponent implements OnInit {
       }
     }
   }
+
+  calcMaxCanBuy() {
+    this.neededMoney = 0;
+    switch (this._multiplier) {
+      case 'x1':
+        this.nbCanBuy = 1;
+        this.neededMoney = this._product.cout;
+        break;
+      case 'x10':
+        this.nbCanBuy = 10;
+        this.neededMoney =
+          (this._product.cout * (1 - Math.pow(this._product.croissance, 10))) /
+          (1 - this._product.croissance);
+        break;
+      case 'x100':
+        this.nbCanBuy = 100;
+        this.neededMoney =
+          (this._product.cout * (1 - Math.pow(this._product.croissance, 100))) /
+          (1 - this._product.croissance);
+        break;
+      case 'xMax':
+        this.nbCanBuy = Math.trunc(
+          Math.log(
+            1 -
+              (this._money * (1 - this._product.croissance)) /
+                this._product.cout
+          ) / Math.log(this._product.croissance)
+        );
+        this.neededMoney =
+          (this._product.cout *
+            (1 - Math.pow(this._product.croissance, this.nbCanBuy))) /
+          (1 - this._product.croissance);
+        break;
+      default:
+        break;
+    }
+  }
+
+  buy() {}
 
   startFabrication() {
     this._product.timeleft = this._product.vitesse;
