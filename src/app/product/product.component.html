@@ -1,23 +1,19 @@
 <div class="product">
-<div class="logo">
-  <img
-    class="logoprod"
-    [attr.src]="server + product.logo"
-    (click)="startFabrication()"
-    />
-</div>
-<div class="money">{{ product.cout }}</div>
-<div class="number">
-  <button mat-raised-button (click)="buy()">
-  Buy x{{ nbCanBuy }} : {{ neededMoney }}
-  </button>
-</div>
-<div class="time">{{ product.vitesse }}</div>
+  <div class="logo">
+    <img class="logoprod" [attr.src]="server + product.logo" (click)="startFabrication()" />
+    
+      <mat-progress-bar class="progressbar" [value]="progressBarValue" ></mat-progress-bar>
+    
+  </div>
+  <div class="money">{{ product.cout }}</div>
+  <div class="number">
+    <button mat-raised-button (click)="buy()" style="width: 100px; overflow: hidden;">
+      Buy x{{ nbCanBuy }} : {{ neededMoney }}
+    </button>
+  </div>
+  <div class="time">{{ product.vitesse }}</div>
 
-<mat-progress-bar
-  class="progressbar"
-  [value]="progressBarValue"
-></mat-progress-bar>
+
 </div>
 
 <!--<div class="number">{{ product.quantite }}</div> -->

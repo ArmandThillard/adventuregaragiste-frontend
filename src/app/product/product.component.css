@@ -1,15 +1,19 @@
 .product {
     display: grid; 
+    width: 100%;
     grid-template-columns: 0.9fr 1fr 1fr; 
     grid-template-rows: 0.8fr 0.9fr; 
     gap: 0px 0px; 
     grid-template-areas: 
       "logo money money"
       "logo number time"; 
+    background-image: url("http://localhost:8081/icones/texture.jpg");
+
   }
 
 .logo {
   grid-area: logo;
+  
   
 }
 
@@ -25,8 +29,14 @@
   grid-area: time;
 }
 
+
 .logoprod {
   width: 100px;
   height: 100px;
-  border-radius: 50%
-}
+  border-radius: 50%;
+  background-color: white; 
+  }
+
+
+
+

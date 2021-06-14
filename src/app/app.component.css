@@ -1,19 +1,28 @@
 .container {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-gap: 10px;
-  grid-auto-rows: minmax(100px, auto);
+  grid-template-columns:20% 40% 40%;  
+  width: 100%;
+  height: 100%;
+  background-repeat: repeat;
+  background-position:  center;
+  background-image: url("http://localhost:8081/icones/background.jpg");
+  
 }
 
+
 .central {  
-  grid-column: 2 / 3 ;
+  grid-column: 2 / 4 ;
+  
   grid-row: 2;
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    justify-items: stretch;
-    align-items: stretch;
-    column-gap: 20px;
-    row-gap: 20px;
+    grid-template-columns: 50% 50%;
+    justify-items: left;
+    align-items: left;
+    
+    width: 100%;
+  height: 100%;
+  
+  
   }
 
 
@@ -25,10 +34,11 @@
   grid-column: 1;
   grid-row: 2;
   
+  
 }
 
 .header {
-  grid-column: 2 / 3 ;
+  grid-column: 2 / 4 ;
   grid-row: 1;
   
 }
