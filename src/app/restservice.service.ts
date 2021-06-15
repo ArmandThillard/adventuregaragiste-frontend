@@ -33,6 +33,15 @@ export class RestserviceService {
     return headers;
   }
 
+  public putProduct(product: Product): Promise<Response> {
+    return this._http
+      .put(this._server + 'adventuregaragiste/generic/product', product, {
+        headers: this.setHeaders(this._user),
+      })
+      .toPromise()
+      .catch(this.handleError);
+  }
+
   public get user(): string {
     return this._user;
   }
