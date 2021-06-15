@@ -15,6 +15,7 @@ export class ProductComponent implements OnInit {
   private _money: number;
   neededMoney: number;
   nbCanBuy: number;
+  isDisabled: boolean;
 
   constructor() {}
 
@@ -49,6 +50,8 @@ export class ProductComponent implements OnInit {
 
   @Output() notifyProduction: EventEmitter<Product> =
     new EventEmitter<Product>();
+
+  @Output() notifyBuy: EventEmitter<number> = new EventEmitter<number>();
 
   calcScore() {
     if (this._product.timeleft !== 0) {
@@ -103,9 +106,13 @@ export class ProductComponent implements OnInit {
       default:
         break;
     }
+    this.isDisabled = this._money <= this.neededMoney ? true : false;
   }
 
-  buy() {}
+  buy() {
+    this._product.quantite += this.nbCanBuy;
+    this.notifyBuy.emit(this.neededMoney);
+  }
 
   startFabrication() {
     this._product.timeleft = this._product.vitesse;
@@ -115,6 +122,7 @@ export class ProductComponent implements OnInit {
   ngOnInit(): void {
     setInterval(() => {
       this.calcScore();
+      this.calcMaxCanBuy();
     }, 100);
   }
 }

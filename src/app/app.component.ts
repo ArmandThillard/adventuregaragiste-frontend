@@ -30,6 +30,10 @@ export class AppComponent {
     this.service.getWorld();
   }
 
+  onBuy(cost: number) {
+    this.world.money -= cost;
+  }
+
   nextMultiplier() {
     let currentMultiplierIndex = this.multiplierValues.indexOf(this.multiplier);
     let nextMultiplierIndex = currentMultiplierIndex + 1;

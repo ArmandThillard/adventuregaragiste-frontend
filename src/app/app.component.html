@@ -23,8 +23,6 @@
     </ul>
   </div>
 
-  
-  
   <div class="central">
     <app-product
       [prod]="p"
@@ -34,23 +32,18 @@
       class="product col-md-6"
       *ngFor="let p of world.products.product"
       (notifyProduction)="onProductionDone($event)"
+      (notifyBuy)="onBuy($event)"
     ></app-product>
   </div>
   
 
   <div class="header">
     <span>{{ world.money }}</span>
-    <span><input
-      type="text"
-      [(ngModel)]="username"
-      (change)="onUsernameChanged()"
+    <span
+      ><input type="text" [(ngModel)]="username" (change)="onUsernameChanged()"
     /></span>
-    <button mat-raised-button (click)="nextMultiplier()" style="float: right;">
+    <button mat-raised-button (click)="nextMultiplier()" style="float: right">
       {{ multiplier }}
     </button>
-       
-    
   </div>
-  
-  
 </div>
