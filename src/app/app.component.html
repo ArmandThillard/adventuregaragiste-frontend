@@ -15,7 +15,9 @@
         <button mat-raised-button>Angel Upgrades</button>
       </li>
       <li>
-        <button mat-raised-button>Managers</button>
+        <button mat-raised-button (click)="showManagers = true">
+          Managers
+        </button>
       </li>
       <li>
         <button mat-raised-button>Investors</button>
@@ -35,7 +37,6 @@
       (notifyBuy)="onBuy($event)"
     ></app-product>
   </div>
-  
 
   <div class="header">
     <span>{{ world.money }}</span>
@@ -45,5 +46,45 @@
     <button mat-raised-button (click)="nextMultiplier()" style="float: right">
       {{ multiplier }}
     </button>
+  </div>
+
+  <div *ngIf="showManagers" class="modal">
+    <div><h1 class="title">Managers make you feel better !</h1></div>
+    <div>
+      <div *ngFor="let manager of world.managers.pallier">
+        <div *ngIf="!manager.unlocked" class="managerslayout">
+          <div>
+            <div class="logo">
+              <img class="round" [attr.src]="server + manager.logo" />
+            </div>
+          </div>
+          <div>
+            <div class="managername">{{ manager.name }}</div>
+            <div class="managercible">
+              {{ world.products.product[manager.idcible - 1].name }}
+            </div>
+            <div class="managercost">{{ manager.seuil }}</div>
+          </div>
+          <div>
+            <button
+              class="hirebutton"
+              mat-raisedbutton
+              (click)="hireManager(manager)"
+              [disabled]="manager.seuil > world.money"
+            >
+              Hire !
+            </button>
+          </div>
+        </div>
+      </div>
+      <button
+        class="closebutton"
+        mat-raisedbutton
+        color="primary"
+        (click)="showManagers = !showManagers"
+      >
+        Close
+      </button>
+    </div>
   </div>
 </div>
