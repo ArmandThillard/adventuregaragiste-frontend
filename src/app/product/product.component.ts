@@ -22,6 +22,11 @@ export class ProductComponent implements OnInit {
   @Input()
   set prod(value: Product) {
     this._product = value;
+    if (this.product && this.product.timeleft > 0) {
+      this.lastUpdate = Date.now();
+      this.progressBarValue =
+        (this.product.vitesse - this.product.timeleft) / this.product.vitesse;
+    }
   }
 
   get product() {
