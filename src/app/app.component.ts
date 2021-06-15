@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { RestserviceService } from './restservice.service';
 import { World, Product, Pallier } from './world';
 
@@ -14,10 +15,14 @@ export class AppComponent {
   multiplierValues = ['x1', 'x10', 'x100', 'xMax'];
   username: string;
   showManagers = false;
+  badgeManagers = 0;
 
   title = 'adventuregaragiste-frontend';
 
-  constructor(private service: RestserviceService) {
+  constructor(
+    private service: RestserviceService,
+    private snackBar: MatSnackBar
+  ) {
     this.server = service.server;
     service.getWorld().then((world) => {
       this.world = world;
@@ -33,6 +38,7 @@ export class AppComponent {
 
   onBuy(cost: number) {
     this.world.money -= cost;
+    this.calcManagersCanBuy();
   }
 
   nextMultiplier() {
@@ -48,12 +54,27 @@ export class AppComponent {
     this.world.money += product.revenu;
     this.world.score += product.revenu;
     this.service.putProduct(product);
+    this.calcManagersCanBuy();
   }
 
   hireManager(manager: Pallier) {
     this.world.money -= manager.seuil;
     manager.unlocked = true;
     this.world.products.product[manager.idcible - 1].managerUnlocked = true;
-    console.log(this.world);
+    this.popMessage('Félicitations ! ' + manager.name + ' a été embauché !');
+    this.calcManagersCanBuy();
+  }
+
+  popMessage(message: string): void {
+    this.snackBar.open(message, '', { duration: 2000 });
+  }
+
+  calcManagersCanBuy() {
+    this.badgeManagers = 0;
+    for (let m of this.world.managers.pallier) {
+      if (!m.unlocked && this.world.money >= m.seuil) {
+        this.badgeManagers++;
+      }
+    }
   }
 }

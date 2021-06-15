@@ -37,7 +37,12 @@
         <button mat-raised-button>Angel Upgrades</button>
       </li>
       <li>
-        <button mat-raised-button (click)="showManagers = true">
+        <button
+          mat-raised-button
+          [matBadge]="badgeManagers"
+          [matBadgeHidden]="badgeManagers == 0"
+          (click)="showManagers = true"
+        >
           Managers
         </button>
       </li>
