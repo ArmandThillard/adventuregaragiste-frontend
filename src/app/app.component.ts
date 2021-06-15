@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { RestserviceService } from './restservice.service';
-import { World, Product } from './world';
+import { World, Product, Pallier } from './world';
 
 @Component({
   selector: 'app-root',
@@ -13,6 +13,7 @@ export class AppComponent {
   multiplier = 'x1';
   multiplierValues = ['x1', 'x10', 'x100', 'xMax'];
   username: string;
+  showManagers = false;
 
   title = 'adventuregaragiste-frontend';
 
@@ -47,5 +48,12 @@ export class AppComponent {
     this.world.money += product.revenu;
     this.world.score += product.revenu;
     this.service.putProduct(product);
+  }
+
+  hireManager(manager: Pallier) {
+    this.world.money -= manager.seuil;
+    manager.unlocked = true;
+    this.world.products.product[manager.idcible - 1].managerUnlocked = true;
+    console.log(this.world);
   }
 }

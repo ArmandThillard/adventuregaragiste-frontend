@@ -11,7 +11,7 @@ export class ProductComponent implements OnInit {
   private _server: string;
   private _multiplier: string;
   progressBarValue: number;
-  lastUpdate: number;
+  lastUpdate = 0;
   private _money: number;
   neededMoney: number;
   nbCanBuy: number;
@@ -54,13 +54,15 @@ export class ProductComponent implements OnInit {
   @Output() notifyBuy: EventEmitter<number> = new EventEmitter<number>();
 
   calcScore() {
-    if (this._product.timeleft !== 0) {
+    if (this._product.timeleft !== 0 || this._product.managerUnlocked) {
       this._product.timeleft -= Date.now() - this.lastUpdate;
       if (this._product.timeleft <= 0) {
         // On prévient le composant parent que ce produit a généré son revenu
         this.notifyProduction.emit(this._product);
         // Réinitialiser les variables
-        this._product.timeleft = 0;
+        this._product.timeleft = this._product.managerUnlocked
+          ? this._product.vitesse
+          : 0;
         this.progressBarValue = 0;
       } else {
         this.progressBarValue =
