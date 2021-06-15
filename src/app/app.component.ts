@@ -46,5 +46,6 @@ export class AppComponent {
   onProductionDone(product: Product) {
     this.world.money += product.revenu;
     this.world.score += product.revenu;
+    this.service.putProduct(product);
   }
 }
