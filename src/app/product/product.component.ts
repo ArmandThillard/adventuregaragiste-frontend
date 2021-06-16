@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Pallier, Product } from 'src/app/world';
 
 @Component({
@@ -17,7 +18,7 @@ export class ProductComponent implements OnInit {
   nbCanBuy: number;
   isDisabled: boolean;
 
-  constructor() {}
+  constructor(private snackBar: MatSnackBar) {}
 
   @Input()
   set prod(value: Product) {
@@ -121,6 +122,9 @@ export class ProductComponent implements OnInit {
     for (let unlock of this._product.palliers.pallier) {
       if (this._product.quantite >= unlock.seuil && !unlock.unlocked) {
         unlock.unlocked = true;
+        this.popMessage(
+          unlock.name + ' ' + unlock.typeratio + ' x' + unlock.ratio
+        );
         switch (unlock.typeratio) {
           case 'vitesse':
             this._product.vitesse = this._product.vitesse / unlock.ratio;
@@ -157,6 +161,10 @@ export class ProductComponent implements OnInit {
       default:
         break;
     }
+  }
+
+  popMessage(message: string): void {
+    this.snackBar.open(message, '', { duration: 2000 });
   }
 
   ngOnInit(): void {
