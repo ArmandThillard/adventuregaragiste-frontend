@@ -16,6 +16,7 @@ export class AppComponent {
   username: string;
   showManagers = false;
   badgeManagers = 0;
+  showUnlocks = false;
 
   title = 'adventuregaragiste-frontend';
 

@@ -118,6 +118,22 @@ export class ProductComponent implements OnInit {
 
   buy() {
     this._product.quantite += this.nbCanBuy;
+    for (let unlock of this._product.palliers.pallier) {
+      if (this._product.quantite >= unlock.seuil && !unlock.unlocked) {
+        unlock.unlocked = true;
+        switch (unlock.typeratio) {
+          case 'vitesse':
+            this._product.vitesse = this._product.vitesse / unlock.ratio;
+            this._product.timeleft = this._product.timeleft / unlock.ratio;
+            break;
+          case 'revenu':
+            this._product.revenu = this._product.revenu * unlock.ratio;
+            break;
+          default:
+            break;
+        }
+      }
+    }
     this.notifyBuy.emit(this.neededMoney);
   }
 
