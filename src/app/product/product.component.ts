@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Product } from 'src/app/world';
+import { Pallier, Product } from 'src/app/world';
 
 @Component({
   selector: 'app-product',
@@ -141,6 +141,21 @@ export class ProductComponent implements OnInit {
     if (this._product.timeleft === 0) {
       this._product.timeleft = this._product.vitesse;
       this.lastUpdate = Date.now();
+    }
+  }
+
+  callUpgrade(pallier: Pallier) {
+    console.log('callUpgrade called');
+    switch (pallier.typeratio) {
+      case 'vitesse':
+        this._product.vitesse = this._product.vitesse / pallier.ratio;
+        this._product.timeleft = this._product.timeleft / pallier.ratio;
+        break;
+      case 'revenu':
+        this._product.revenu = this._product.revenu * pallier.ratio;
+        break;
+      default:
+        break;
     }
   }
 

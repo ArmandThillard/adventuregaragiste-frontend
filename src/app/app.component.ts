@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, QueryList, ViewChildren } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ProductComponent } from './product/product.component';
 import { RestserviceService } from './restservice.service';
 import { World, Product, Pallier } from './world';
 
@@ -17,6 +18,9 @@ export class AppComponent {
   showManagers = false;
   badgeManagers = 0;
   showUnlocks = false;
+
+  @ViewChildren(ProductComponent)
+  productsComponent: QueryList<ProductComponent>;
 
   title = 'adventuregaragiste-frontend';
 
@@ -40,6 +44,21 @@ export class AppComponent {
   onBuy(cost: number) {
     this.world.money -= cost;
     this.calcManagersCanBuy();
+    let minQuantity = this.world.allunlocks.pallier[0].seuil;
+    for (let p of this.world.products.product) {
+      if (p.quantite < minQuantity) {
+        minQuantity = p.quantite;
+      }
+    }
+    for (let unlock of this.world.allunlocks.pallier) {
+      if (minQuantity >= unlock.seuil && !unlock.unlocked) {
+        unlock.unlocked = true;
+        this.productsComponent.forEach((p) => p.callUpgrade(unlock));
+        this.popMessage(
+          unlock.name + ' ' + unlock.typeratio + ' x' + unlock.ratio
+        );
+      }
+    }
   }
 
   nextMultiplier() {
