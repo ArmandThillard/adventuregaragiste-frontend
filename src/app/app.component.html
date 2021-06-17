@@ -33,7 +33,14 @@
         </button>
       </li>
       <li>
-        <button mat-raised-button>Cash Upgrades</button>
+        <button
+          mat-raised-button
+          [matBadge]="badgeUpgrades"
+          [matBadgeHidden]="badgeUpgrades == 0"
+          (click)="showUpgrades = true"
+        >
+          Cash Upgrades
+        </button>
       </li>
       <li>
         <button mat-raised-button>Angel Upgrades</button>
@@ -169,5 +176,48 @@
         Close
       </button>
     </div>
+  </div>
+
+  <div *ngIf="showUpgrades" class="modal">
+    <div>
+      <h1 class="title">Boost your investments!</h1>
+    </div>
+    <div>
+      <div *ngFor="let upgrade of world.upgrades.pallier">
+        <div *ngIf="!upgrade.unlocked" class="upgradelayout">
+          <div>
+            <div class="logo">
+              <img class="round" [attr.src]="server + upgrade.logo" />
+            </div>
+          </div>
+          <div>
+            <div class="upgradename">{{ upgrade.name }}</div>
+            <div class="upgradecible">
+              {{ world.products.product[upgrade.idcible - 1].name }}
+            </div>
+            <div>{{ upgrade.typeratio }} x {{ upgrade.ratio }}</div>
+            <div class="upgradescost">{{ upgrade.seuil }}</div>
+            <div>
+              <button
+                class="upgradebutton"
+                mat-raisedbutton
+                (click)="buyUpgrade(upgrade)"
+                [disabled]="upgrade.seuil > world.money"
+              >
+                Buy!
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button
+      class="closebutton"
+      mat-raisedbutton
+      color="primary"
+      (click)="showUpgrades = !showUpgrades"
+    >
+      Close
+    </button>
   </div>
 </div>

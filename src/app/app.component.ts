@@ -17,7 +17,9 @@ export class AppComponent {
   username: string;
   showManagers = false;
   badgeManagers = 0;
+  badgeUpgrades = 0;
   showUnlocks = false;
+  showUpgrades = false;
 
   @ViewChildren(ProductComponent)
   productsComponent: QueryList<ProductComponent>;
@@ -42,6 +44,7 @@ export class AppComponent {
   }
 
   onBuy(cost: number) {
+    console.log(this.productsComponent);
     this.world.money -= cost;
     this.calcManagersCanBuy();
     let minQuantity = this.world.allunlocks.pallier[0].seuil;
@@ -85,15 +88,44 @@ export class AppComponent {
     this.calcManagersCanBuy();
   }
 
+  buyUpgrade(upgrade: Pallier) {
+    this.world.money -= upgrade.seuil;
+    upgrade.unlocked = true;
+    this.popMessage(
+      upgrade.name + ' ' + upgrade.typeratio + ' x' + upgrade.ratio
+    );
+    switch (upgrade.idcible) {
+      case -1:
+        break;
+      case 0:
+        this.productsComponent.forEach((p) => p.callUpgrade(upgrade));
+        break;
+      default:
+        this.productsComponent.forEach((p) => {
+          if (upgrade.idcible === p.product.id) {
+            p.callUpgrade(upgrade);
+          }
+        });
+        break;
+    }
+    this.calcManagersCanBuy();
+  }
+
   popMessage(message: string): void {
     this.snackBar.open(message, '', { duration: 2000 });
   }
 
   calcManagersCanBuy() {
     this.badgeManagers = 0;
+    this.badgeUpgrades = 0;
     for (let m of this.world.managers.pallier) {
       if (!m.unlocked && this.world.money >= m.seuil) {
         this.badgeManagers++;
+      }
+    }
+    for (let u of this.world.upgrades.pallier) {
+      if (!u.unlocked && this.world.money >= u.seuil) {
+        this.badgeUpgrades++;
       }
     }
   }
