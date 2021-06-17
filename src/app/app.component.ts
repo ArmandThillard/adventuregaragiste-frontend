@@ -46,7 +46,7 @@ export class AppComponent {
   onBuy(cost: number) {
     console.log(this.productsComponent);
     this.world.money -= cost;
-    this.calcManagersCanBuy();
+    this.calcBadges();
     let minQuantity = this.world.allunlocks.pallier[0].seuil;
     for (let p of this.world.products.product) {
       if (p.quantite < minQuantity) {
@@ -77,7 +77,7 @@ export class AppComponent {
     this.world.money += product.revenu;
     this.world.score += product.revenu;
     this.service.putProduct(product);
-    this.calcManagersCanBuy();
+    this.calcBadges();
   }
 
   hireManager(manager: Pallier) {
@@ -85,7 +85,7 @@ export class AppComponent {
     manager.unlocked = true;
     this.world.products.product[manager.idcible - 1].managerUnlocked = true;
     this.popMessage('Félicitations ! ' + manager.name + ' a été embauché !');
-    this.calcManagersCanBuy();
+    this.calcBadges();
   }
 
   buyUpgrade(upgrade: Pallier) {
@@ -108,14 +108,14 @@ export class AppComponent {
         });
         break;
     }
-    this.calcManagersCanBuy();
+    this.calcBadges();
   }
 
   popMessage(message: string): void {
     this.snackBar.open(message, '', { duration: 2000 });
   }
 
-  calcManagersCanBuy() {
+  calcBadges() {
     this.badgeManagers = 0;
     this.badgeUpgrades = 0;
     for (let m of this.world.managers.pallier) {
