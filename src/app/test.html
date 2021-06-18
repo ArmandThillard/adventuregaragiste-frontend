@@ -1,0 +1,21 @@
+<div *ngFor="let manager of world.managers.pallier">
+        <div *ngIf="!manager.unlocked" class="managerslayout">
+          
+		  <div>            
+              <img class="round" [attr.src]="server + manager.logo" />
+          </div>
+		  
+          <div>
+            {{ manager.name }}            
+            {{ world.products.product[manager.idcible - 1].name }}
+            {{ manager.seuil }}
+          
+            <button
+              class="hirebutton"
+              mat-raisedbutton
+              (click)="hireManager(manager)"
+              [disabled]="manager.seuil > world.money"
+            >
+              Hire !
+            </button>
+		</div>

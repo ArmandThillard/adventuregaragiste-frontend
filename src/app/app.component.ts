@@ -3,6 +3,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ProductComponent } from './product/product.component';
 import { RestserviceService } from './restservice.service';
 import { World, Product, Pallier } from './world';
+import { TemplateRef, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-root',
@@ -23,12 +25,18 @@ export class AppComponent {
 
   @ViewChildren(ProductComponent)
   productsComponent: QueryList<ProductComponent>;
+  
+  @Component({
+    selector: 'material-app',
+    templateUrl: 'app.component.html'
+  })
 
   title = 'adventuregaragiste-frontend';
 
   constructor(
     private service: RestserviceService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private dialog: MatDialog
   ) {
     this.server = service.server;
     service.getWorld().then((world) => {
@@ -36,6 +44,18 @@ export class AppComponent {
     });
     this.username = localStorage.getItem('username');
   }
+
+  @ViewChild('secondDialog', { static: true }) secondDialog: TemplateRef<any>;
+
+  openDialogWithTemplateRef(templateRef: TemplateRef<any>) {
+    this.dialog.open(templateRef);
+  }
+  openDialogWithoutRef() {
+    this.dialog.open(this.secondDialog);
+  }
+
+ 
+  
 
   onUsernameChanged() {
     localStorage.setItem('username', this.username);
@@ -130,3 +150,7 @@ export class AppComponent {
     }
   }
 }
+
+
+
+
