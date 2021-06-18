@@ -1,4 +1,26 @@
 <div class="container">
+
+
+
+  <div class="titre">
+    <span id="worldname" style="top: 50%; position: relative;">{{ world.name }}</span>
+  </div>
+
+  
+    <div class="header">
+      
+      <span
+        >Joueur : <input
+          type="text"
+          [(ngModel)]="username"
+          (change)="onUsernameChanged()"
+      /></span>
+      <span>Argent gagné : {{ world.money }}</span>
+      <button mat-raised-button (click)="nextMultiplier()" >
+        {{ multiplier }}
+      </button>
+    </div>
+    <!--
   <div class="logo">
     <span><img [attr.src]="server + world.logo" /></span>
     <span id="worldname">{{ world.name }}</span>

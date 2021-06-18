@@ -1,5 +1,7 @@
 .product {
   display: grid;
+  border: 2px inset rgba(59, 64, 66, 0.9);
+border-radius: 50px;
   width: 100%;
   grid-template-columns: 0.9fr 1fr 1fr;
   grid-template-rows: 0.8fr 0.9fr;
@@ -8,6 +10,13 @@
     "logo money money"
     "logo number time";
   background-image: url("http://localhost:8081/icones/texture.jpg");
+  overflow: hidden;
+  background-size: cover;
+  color: aliceblue;
+  font-size:larger;
+  overflow: hidden;
+  background-size: cover;
+  
 }
 
 .logo {
@@ -16,6 +25,16 @@
 
 .money {
   grid-area: money;
+  position: relative;
+  
+}
+
+.money2 {
+  position: relative;
+  left: 40%;
+  top: 20%;
+  
+  
 }
 
 .number {
@@ -31,4 +50,14 @@
   height: 100px;
   border-radius: 50%;
   background-color: white;
+}
+
+
+mat-progress-bar {
+          height: 40px;
+          position: absolute;
+          border-radius: 5px;
+          background-image: url("http://localhost:8081/icones/damier.jpg");
+         
+          
 }
