@@ -48,13 +48,14 @@
             Angel Upgrades
           </button>
         </li>
+
         <li>
           <button
             mat-raised-button
             [matBadge]="badgeManagers"
             [matBadgeHidden]="badgeManagers == 0"
-            (click)="showManagers = true"
             style="width: 150px; margin: 0 0 5px 0"
+            (click)="openDialogWithTemplateRef(myDialog2)"
           >
             Managers
           </button>
@@ -82,46 +83,6 @@
         (notifyProduction)="onProductionDone($event)"
         (notifyBuy)="onBuy($event)"
       ></app-product>
-    </div>
-  </div>
-
-  <div *ngIf="showManagers" class="modal">
-    <div><h1 class="title">Managers make you feel better !</h1></div>
-    <div>
-      <div *ngFor="let manager of world.managers.pallier">
-        <div *ngIf="!manager.unlocked" class="managerslayout">
-          <div>
-            <div class="logo">
-              <img class="round" [attr.src]="server + manager.logo" />
-            </div>
-          </div>
-          <div>
-            <div class="managername">{{ manager.name }}</div>
-            <div class="managercible">
-              {{ world.products.product[manager.idcible - 1].name }}
-            </div>
-            <div class="managercost">{{ manager.seuil }}</div>
-          </div>
-          <div>
-            <button
-              class="hirebutton"
-              mat-raisedbutton
-              (click)="hireManager(manager)"
-              [disabled]="manager.seuil > world.money"
-            >
-              Hire !
-            </button>
-          </div>
-        </div>
-      </div>
-      <button
-        class="closebutton"
-        mat-raisedbutton
-        color="primary"
-        (click)="showManagers = !showManagers"
-      >
-        Close
-      </button>
     </div>
   </div>
 
@@ -242,3 +203,38 @@
     </button>
   </div>
 </div>
+
+<ng-template #myDialog2>
+  <h2 matDialogTitle>Managers make you feel better !</h2>
+
+  <mat-dialog-content>
+    <div *ngFor="let manager of world.managers.pallier">
+      <div *ngIf="!manager.unlocked" class="managerslayout">
+        <div class="one">
+          <img class="round" [attr.src]="server + manager.logo" />
+        </div>
+
+        <div class="two">
+          <b>Manager : </b>{{ manager.name }} <br />
+          <b>Voiture : </b
+          >{{ world.products.product[manager.idcible - 1].name }}
+          <br />
+          <b>Prix : </b>{{ manager.seuil }} <br />
+
+          <button
+            class="hirebutton"
+            mat-raisedbutton
+            (click)="hireManager(manager)"
+            [disabled]="manager.seuil > world.money"
+          >
+            Hire !
+          </button>
+        </div>
+      </div>
+    </div>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button mat-button matDialogClose color="primary">Fermer</button>
+  </mat-dialog-actions>
+</ng-template>

@@ -11,6 +11,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { FormsModule } from '@angular/forms';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatBadgeModule } from '@angular/material/badge';
+import {MatDialogModule} from '@angular/material/dialog';
 
 @NgModule({
   declarations: [AppComponent, ProductComponent],
@@ -24,6 +25,7 @@ import { MatBadgeModule } from '@angular/material/badge';
     FormsModule,
     MatSnackBarModule,
     MatBadgeModule,
+    MatDialogModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
