@@ -1,68 +1,64 @@
 .container {
-  
   width: 100%;
-  
-  background-repeat: repeat;
   background-position: center;
   background-image: url("http://localhost:8081/icones/background.jpg");
   background-size: cover;
 }
 
 .container2 {
+  position: relative;
   display: grid;
   grid-template-columns: 20% 80%;
-  
-  
 }
 
 .central {
+  position: relative;
   display: grid;
   grid-template-columns: 50% 50%;
   column-gap: 10px;
   row-gap: 10px;
-  
 }
 
-
-
 .bandeau {
+  position: relative;
   width: 100%;
-  
 }
 
 .header {
   width: 100%;
-  color: #fff; 
-  font-family: 'Open Sans Condensed', sans-serif;
-  font-size: 20px; 
-  font-weight: normal; 
-  line-height: 60px; 
-  margin: 10px 0 20px; 
-  text-transform: uppercase; 
-  text-shadow: 2px 2px 0 #000; margin: 10px 0 24px; text-align: center;
+  color: #fff;
+  font-family: "Open Sans Condensed", sans-serif;
+  font-size: 20px;
+  font-weight: normal;
+  line-height: 60px;
+  margin: 10px 0 20px;
+  text-transform: uppercase;
+  text-shadow: 2px 2px 0 #000;
+  margin: 10px 0 24px;
+  text-align: center;
 }
 
 .titre {
-  color: #fff; 
-  font-family: 'Open Sans Condensed', sans-serif;
-  font-size: 65px; 
-  font-weight: normal; 
-  line-height: 60px; 
-  margin: 10px 0 20px; 
-  text-transform: uppercase; 
-  text-shadow: 2px 2px 0 #000; margin: 10px 0 24px; text-align: center;
+  color: #fff;
+  font-family: "Open Sans Condensed", sans-serif;
+  font-size: 65px;
+  font-weight: normal;
+  line-height: 60px;
+  margin: 10px 0 20px;
+  text-transform: uppercase;
+  text-shadow: 2px 2px 0 #000;
+  margin: 10px 0 24px;
+  text-align: center;
 }
-
 
 .modal {
   position: fixed; /* reste en place */
   z-index: 2; /* au dessus du reste */
-  width: 800px; /* largeur */
-  height: 800px; /* hauteur */
+  width: 400px; /* largeur */
+  height: 400px; /* hauteur */
   overflow: auto; /* barre de scroll si besoin */
   background-color: white; /* opaque */
   border: solid;
-  top: 10; /* a 10% du haut */
+  top: 10%; /* a 10% du haut */
   left: 20%; /* a 20% de la gauche */
 }
-
