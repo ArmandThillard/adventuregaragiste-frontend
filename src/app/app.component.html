@@ -60,7 +60,11 @@
           </button>
         </li>
         <li>
-          <button mat-raised-button style="width: 150px; margin: 0 0 5px 0">
+          <button
+            mat-raised-button
+            (click)="showInvestors = true"
+            style="width: 150px; margin: 0 0 5px 0"
+          >
             Investors
           </button>
         </li>
@@ -213,6 +217,26 @@
       mat-raisedbutton
       color="primary"
       (click)="showUpgrades = !showUpgrades"
+    >
+      Close
+    </button>
+  </div>
+  <div *ngIf="showInvestors" class="modal">
+    <div>
+      <h1 class="title">Angel investors</h1>
+    </div>
+    <div>
+      <p>{{ world.totalangels }} Total angels</p>
+      <p>2% bonus per angel</p>
+      <button class="angelbutton" mat-raisedbutton (click)="claimAngels()">
+        {{ angelsToClaim }} angels to claim with restart
+      </button>
+    </div>
+    <button
+      class="closebutton"
+      mat-raisedbutton
+      color="primary"
+      (click)="showInvestors = !showInvestors"
     >
       Close
     </button>
