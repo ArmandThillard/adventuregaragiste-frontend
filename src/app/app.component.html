@@ -28,16 +28,30 @@
   <div class="bandeau">
     <ul>
       <li>
-        <button mat-raised-button color="primary">Unlocks</button>
+        <button mat-raised-button color="primary" (click)="showUnlocks = true">
+          Unlocks
+        </button>
       </li>
       <li>
-        <button mat-raised-button>Cash Upgrades</button>
+        <button
+          mat-raised-button
+          [matBadge]="badgeUpgrades"
+          [matBadgeHidden]="badgeUpgrades == 0"
+          (click)="showUpgrades = true"
+        >
+          Cash Upgrades
+        </button>
       </li>
       <li>
         <button mat-raised-button>Angel Upgrades</button>
       </li>
       <li>
-        <button mat-raised-button (click)="showManagers = true">
+        <button
+          mat-raised-button
+          [matBadge]="badgeManagers"
+          [matBadgeHidden]="badgeManagers == 0"
+          (click)="showManagers = true"
+        >
           Managers
         </button>
       </li>
@@ -108,5 +122,102 @@
         Close
       </button>
     </div>
+  </div>
+
+  <div *ngIf="showUnlocks" class="modal">
+    <div>
+      <h1 class="title">
+        Want to maximize profits? Get your investments to these quotas!
+      </h1>
+    </div>
+    <div>
+      <div *ngFor="let product of world.products.product">
+        <div *ngFor="let unlock of product.palliers.pallier">
+          <div *ngIf="!unlock.unlocked" class="unlockslayout">
+            <div>
+              <div class="logo">
+                <img class="round" [attr.src]="server + unlock.logo" />
+              </div>
+            </div>
+            <div>
+              <div class="unlockname">{{ unlock.name }}</div>
+              <div class="unlockcible">
+                {{ world.products.product[unlock.idcible - 1].name }}
+              </div>
+              <div>{{ unlock.typeratio }} x {{ unlock.ratio }}</div>
+              <div class="unlockscost">{{ unlock.seuil }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div *ngFor="let unlock of world.allunlocks.pallier">
+        <div *ngIf="!unlock.unlocked" class="unlockslayout">
+          <div>
+            <div class="logo">
+              <img class="round" [attr.src]="server + unlock.logo" />
+            </div>
+          </div>
+          <div>
+            <div class="unlockname">{{ unlock.name }}</div>
+            <div class="unlockcible">
+              {{ world.products.product[unlock.idcible - 1].name }}
+            </div>
+            <div>{{ unlock.typeratio }} x {{ unlock.ratio }}</div>
+            <div class="unlockscost">{{ unlock.seuil }}</div>
+          </div>
+        </div>
+      </div>
+      <button
+        class="closebutton"
+        mat-raisedbutton
+        color="primary"
+        (click)="showUnlocks = !showUnlocks"
+      >
+        Close
+      </button>
+    </div>
+  </div>
+
+  <div *ngIf="showUpgrades" class="modal">
+    <div>
+      <h1 class="title">Boost your investments!</h1>
+    </div>
+    <div>
+      <div *ngFor="let upgrade of world.upgrades.pallier">
+        <div *ngIf="!upgrade.unlocked" class="upgradelayout">
+          <div>
+            <div class="logo">
+              <img class="round" [attr.src]="server + upgrade.logo" />
+            </div>
+          </div>
+          <div>
+            <div class="upgradename">{{ upgrade.name }}</div>
+            <div class="upgradecible">
+              {{ world.products.product[upgrade.idcible - 1].name }}
+            </div>
+            <div>{{ upgrade.typeratio }} x {{ upgrade.ratio }}</div>
+            <div class="upgradescost">{{ upgrade.seuil }}</div>
+            <div>
+              <button
+                class="upgradebutton"
+                mat-raisedbutton
+                (click)="buyUpgrade(upgrade)"
+                [disabled]="upgrade.seuil > world.money"
+              >
+                Buy!
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button
+      class="closebutton"
+      mat-raisedbutton
+      color="primary"
+      (click)="showUpgrades = !showUpgrades"
+    >
+      Close
+    </button>
   </div>
 </div>

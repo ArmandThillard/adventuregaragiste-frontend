@@ -42,6 +42,15 @@ export class RestserviceService {
       .catch(this.handleError);
   }
 
+  public putManager(manager: Pallier): Promise<Response> {
+    return this._http
+      .put(this._server + 'adventuregaragiste/generic/manager', manager, {
+        headers: this.setHeaders(this._user),
+      })
+      .toPromise()
+      .catch(this.handleError);
+  }
+
   public get user(): string {
     return this._user;
   }

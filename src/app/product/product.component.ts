@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Product } from 'src/app/world';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Pallier, Product } from 'src/app/world';
 
 @Component({
   selector: 'app-product',
@@ -17,11 +18,16 @@ export class ProductComponent implements OnInit {
   nbCanBuy: number;
   isDisabled: boolean;
 
-  constructor() {}
+  constructor(private snackBar: MatSnackBar) {}
 
   @Input()
   set prod(value: Product) {
     this._product = value;
+    if (this.product && this.product.timeleft > 0) {
+      this.lastUpdate = Date.now();
+      this.progressBarValue =
+        (this.product.vitesse - this.product.timeleft) / this.product.vitesse;
+    }
   }
 
   get product() {
@@ -113,12 +119,52 @@ export class ProductComponent implements OnInit {
 
   buy() {
     this._product.quantite += this.nbCanBuy;
+    for (let unlock of this._product.palliers.pallier) {
+      if (this._product.quantite >= unlock.seuil && !unlock.unlocked) {
+        unlock.unlocked = true;
+        this.popMessage(
+          unlock.name + ' ' + unlock.typeratio + ' x' + unlock.ratio
+        );
+        switch (unlock.typeratio) {
+          case 'vitesse':
+            this._product.vitesse = this._product.vitesse / unlock.ratio;
+            this._product.timeleft = this._product.timeleft / unlock.ratio;
+            break;
+          case 'revenu':
+            this._product.revenu = this._product.revenu * unlock.ratio;
+            break;
+          default:
+            break;
+        }
+      }
+    }
     this.notifyBuy.emit(this.neededMoney);
   }
 
   startFabrication() {
-    this._product.timeleft = this._product.vitesse;
-    this.lastUpdate = Date.now();
+    if (this._product.timeleft === 0) {
+      this._product.timeleft = this._product.vitesse;
+      this.lastUpdate = Date.now();
+    }
+  }
+
+  callUpgrade(pallier: Pallier) {
+    console.log('callUpgrade called');
+    switch (pallier.typeratio) {
+      case 'vitesse':
+        this._product.vitesse = this._product.vitesse / pallier.ratio;
+        this._product.timeleft = this._product.timeleft / pallier.ratio;
+        break;
+      case 'revenu':
+        this._product.revenu = this._product.revenu * pallier.ratio;
+        break;
+      default:
+        break;
+    }
+  }
+
+  popMessage(message: string): void {
+    this.snackBar.open(message, '', { duration: 2000 });
   }
 
   ngOnInit(): void {
