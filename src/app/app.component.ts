@@ -20,6 +20,8 @@ export class AppComponent {
   badgeUpgrades = 0;
   showUnlocks = false;
   showUpgrades = false;
+  showInvestors = false;
+  angelsToClaim = 0;
 
   @ViewChildren(ProductComponent)
   productsComponent: QueryList<ProductComponent>;
@@ -78,6 +80,7 @@ export class AppComponent {
     this.world.score += product.revenu;
     this.service.putProduct(product);
     this.calcBadges();
+    this.calcAngels();
   }
 
   hireManager(manager: Pallier) {
@@ -129,4 +132,15 @@ export class AppComponent {
       }
     }
   }
+
+  calcAngels() {
+    this.angelsToClaim =
+      150 * Math.sqrt(this.world.score / Math.pow(10, 15)) -
+      this.world.totalangels;
+  }
+
+  /**
+   * @todo appeler l'API Rest pour reset le monde
+   */
+  claimAngels() {}
 }
