@@ -24,6 +24,7 @@ export class AppComponent {
   showUpgrades = false;
   showInvestors = false;
   angelsToClaim = 0;
+  badgeAngelUpgrades = 0;
 
   @ViewChildren(ProductComponent)
   productsComponent: QueryList<ProductComponent>;
@@ -96,8 +97,14 @@ export class AppComponent {
   }
 
   onProductionDone(product: Product) {
-    this.world.money += product.revenu;
-    this.world.score += product.revenu;
+    this.world.money +=
+      product.quantite *
+      product.revenu *
+      (1 + (this.world.activeangels * this.world.angelbonus) / 100);
+    this.world.score +=
+      product.quantite *
+      product.revenu *
+      (1 + (this.world.activeangels * this.world.angelbonus) / 100);
     this.service.putProduct(product);
     this.calcBadges();
     this.calcAngels();
@@ -161,6 +168,7 @@ export class AppComponent {
 
   /**
    * @todo appeler l'API Rest pour reset le monde
+   * Mettre à jour les propriétés totalangels
    */
   claimAngels() {}
 }
