@@ -127,7 +127,13 @@ export class ProductComponent implements OnInit {
       if (this._product.quantite >= unlock.seuil && !unlock.unlocked) {
         unlock.unlocked = true;
         this.popMessage(
-          unlock.name + ' ' + unlock.typeratio + ' x' + unlock.ratio
+          unlock.name +
+            ' ' +
+            this._product.name +
+            ' ' +
+            unlock.typeratio +
+            ' x' +
+            unlock.ratio
         );
         switch (unlock.typeratio) {
           case 'vitesse':

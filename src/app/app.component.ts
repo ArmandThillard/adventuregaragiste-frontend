@@ -116,39 +116,43 @@ export class AppComponent {
 
   buyUpgrade(upgrade: Pallier) {
     this.world.money -= upgrade.seuil;
-    this.popMessage(
-      upgrade.name + ' ' + upgrade.typeratio + ' x' + upgrade.ratio
-    );
     this.spreadUpgrade(upgrade);
     this.service.putUpgrade(upgrade);
   }
 
   buyAngelUpgrade(upgrade: Pallier) {
     this.world.activeangels -= upgrade.seuil;
-    this.popMessage(
-      upgrade.name + ' ' + upgrade.typeratio + ' x' + upgrade.ratio
-    );
     this.spreadUpgrade(upgrade);
     this.service.putAngelUpgrade(upgrade);
   }
 
   spreadUpgrade(upgrade: Pallier) {
     upgrade.unlocked = true;
+    let msg = upgrade.name + ' ';
     switch (upgrade.idcible) {
       case -1:
         this.world.angelbonus += upgrade.ratio;
+        msg += 'angel investors effectivenes +' + upgrade.ratio + '%';
         break;
       case 0:
+        msg += 'all profits x' + upgrade.ratio;
         this.productsComponent.forEach((p) => p.callUpgrade(upgrade));
         break;
       default:
         this.productsComponent.forEach((p) => {
           if (upgrade.idcible === p.product.id) {
             p.callUpgrade(upgrade);
+            msg += p.product.name + ' ';
+            if (upgrade.typeratio === 'quantite') {
+              msg += 'quantity +' + upgrade.ratio;
+            } else {
+              msg += upgrade.typeratio + ' x' + upgrade.ratio;
+            }
           }
         });
         break;
     }
+    this.popMessage(msg);
     this.calcBadges();
   }
 
