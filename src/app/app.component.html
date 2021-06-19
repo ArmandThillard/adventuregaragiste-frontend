@@ -263,18 +263,19 @@
 
         <div class="two">
           <b>Angel : </b>{{ angelUpgrade.name }} <br />
-          <p *ngIf="angelUpgrade.idcible == -1">
+          <span *ngIf="angelUpgrade.idcible == -1">
             Angels effectiveness +{{ angelUpgrade.ratio }}%
-          </p>
-          <p *ngIf="angelUpgrade.idcible == 0">
+          </span>
+          <span *ngIf="angelUpgrade.idcible == 0">
             All profits x{{ angelUpgrade.ratio }}
-          </p>
-          <p *ngIf="angelUpgrade.idcible > 0">
-            {{ world.products.product[angelUpgrade.idcible - 1].name }} +{{
+          </span>
+          <span *ngIf="angelUpgrade.idcible > 0"
+            >{{ world.products.product[angelUpgrade.idcible - 1].name }} +{{
               angelUpgrade.ratio
-            }}
-          </p>
-          <b>Prix : </b>{{ angelUpgrade.seuil }} <br />
+            }} </span
+          ><br />
+          <b>Prix : </b
+          ><span [innerHtml]="angelUpgrade.seuil | bigvalue"></span> <br />
 
           <button
             mat-raised-button
