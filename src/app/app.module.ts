@@ -12,9 +12,10 @@ import { FormsModule } from '@angular/forms';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatBadgeModule } from '@angular/material/badge';
 import {MatDialogModule} from '@angular/material/dialog';
+import { BigvaluePipe } from './bigvalue.pipe';
 
 @NgModule({
-  declarations: [AppComponent, ProductComponent],
+  declarations: [AppComponent, ProductComponent, BigvaluePipe],
   imports: [
     BrowserModule,
     AppRoutingModule,

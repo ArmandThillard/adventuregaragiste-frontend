@@ -10,7 +10,9 @@
       >Joueur :
       <input type="text" [(ngModel)]="username" (change)="onUsernameChanged()"
     /></span>
-    <span>Argent gagné : {{ world.money }}</span>
+    <span
+      >Argent gagné : <span [innerHTML]="world.money | bigvalue"></span
+    ></span>
     <button mat-raised-button (click)="nextMultiplier()">
       {{ multiplier }}
     </button>
