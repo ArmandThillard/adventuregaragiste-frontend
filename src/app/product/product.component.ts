@@ -149,14 +149,16 @@ export class ProductComponent implements OnInit {
   }
 
   callUpgrade(pallier: Pallier) {
-    console.log('callUpgrade called');
     switch (pallier.typeratio) {
       case 'vitesse':
         this._product.vitesse = this._product.vitesse / pallier.ratio;
         this._product.timeleft = this._product.timeleft / pallier.ratio;
         break;
-      case 'revenu':
+      case 'gain':
         this._product.revenu = this._product.revenu * pallier.ratio;
+        break;
+      case 'quantite':
+        this._product.quantite += pallier.ratio;
         break;
       default:
         break;

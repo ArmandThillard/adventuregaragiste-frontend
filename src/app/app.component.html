@@ -44,7 +44,13 @@
           </button>
         </li>
         <li>
-          <button mat-raised-button style="width: 150px; margin: 0 0 5px 0">
+          <button
+            mat-raised-button
+            [matBadge]="badgeAngelUpgrades"
+            [matBadgeHidden]="badgeAngelUpgrades == 0"
+            style="width: 150px; margin: 0 0 5px 0"
+            (click)="openDialogWithTemplateRef(angelUpgrades)"
+          >
             Angel Upgrades
           </button>
         </li>
@@ -238,8 +244,49 @@
       </div>
     </mat-dialog-content>
 
-    <mat-dialog-actions align="end">
-      <button mat-button matDialogClose color="primary">Fermer</button>
-    </mat-dialog-actions>
-  </ng-template>
-</div>
+  <mat-dialog-actions align="end">
+    <button mat-button matDialogClose color="primary">Fermer</button>
+  </mat-dialog-actions>
+</ng-template>
+
+<ng-template #angelUpgrades>
+  <h2 matDialogTitle>Spend your Angels wisely!</h2>
+
+  <mat-dialog-content>
+    <div *ngFor="let angelUpgrade of world.angelupgrades.pallier">
+      <div *ngIf="!angelUpgrade.unlocked" class="managerslayout">
+        <div class="one">
+          <img class="round" [attr.src]="server + angelUpgrade.logo" />
+        </div>
+
+        <div class="two">
+          <b>Angel : </b>{{ angelUpgrade.name }} <br />
+          <p *ngIf="angelUpgrade.idcible == -1">
+            Angels effectiveness +{{ angelUpgrade.ratio }}%
+          </p>
+          <p *ngIf="angelUpgrade.idcible == 0">
+            All profits x{{ angelUpgrade.ratio }}
+          </p>
+          <p *ngIf="angelUpgrade.idcible > 0">
+            {{ world.products.product[angelUpgrade.idcible - 1].name }} +{{
+              angelUpgrade.ratio
+            }}
+          </p>
+          <b>Prix : </b>{{ angelUpgrade.seuil }} <br />
+
+          <button
+            mat-raised-button
+            (click)="buyAngelUpgrade(angelUpgrade)"
+            [disabled]="angelUpgrade.seuil > world.activeangels"
+          >
+            Buy!
+          </button>
+        </div>
+      </div>
+    </div>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button mat-button matDialogClose color="primary">Fermer</button>
+  </mat-dialog-actions>
+</ng-template>

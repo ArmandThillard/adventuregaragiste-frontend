@@ -28,12 +28,11 @@ export class AppComponent {
 
   @ViewChildren(ProductComponent)
   productsComponent: QueryList<ProductComponent>;
-  
+
   @Component({
     selector: 'material-app',
-    templateUrl: 'app.component.html'
+    templateUrl: 'app.component.html',
   })
-
   title = 'adventuregaragiste-frontend';
 
   constructor(
@@ -57,9 +56,6 @@ export class AppComponent {
     this.dialog.open(this.secondDialog);
   }
 
- 
-  
-
   onUsernameChanged() {
     localStorage.setItem('username', this.username);
     this.service.user = this.username;
@@ -67,7 +63,6 @@ export class AppComponent {
   }
 
   onBuy(cost: number) {
-    console.log(this.productsComponent);
     this.world.money -= cost;
     this.calcBadges();
     let minQuantity = this.world.allunlocks.pallier[0].seuil;
@@ -120,12 +115,25 @@ export class AppComponent {
 
   buyUpgrade(upgrade: Pallier) {
     this.world.money -= upgrade.seuil;
-    upgrade.unlocked = true;
     this.popMessage(
       upgrade.name + ' ' + upgrade.typeratio + ' x' + upgrade.ratio
     );
+    this.spreadUpgrade(upgrade);
+  }
+
+  buyAngelUpgrade(upgrade: Pallier) {
+    this.world.activeangels -= upgrade.seuil;
+    this.popMessage(
+      upgrade.name + ' ' + upgrade.typeratio + ' x' + upgrade.ratio
+    );
+    this.spreadUpgrade(upgrade);
+  }
+
+  spreadUpgrade(upgrade: Pallier) {
+    upgrade.unlocked = true;
     switch (upgrade.idcible) {
       case -1:
+        this.world.angelbonus += upgrade.ratio;
         break;
       case 0:
         this.productsComponent.forEach((p) => p.callUpgrade(upgrade));
@@ -148,6 +156,7 @@ export class AppComponent {
   calcBadges() {
     this.badgeManagers = 0;
     this.badgeUpgrades = 0;
+    this.badgeAngelUpgrades = 0;
     for (let m of this.world.managers.pallier) {
       if (!m.unlocked && this.world.money >= m.seuil) {
         this.badgeManagers++;
@@ -156,6 +165,11 @@ export class AppComponent {
     for (let u of this.world.upgrades.pallier) {
       if (!u.unlocked && this.world.money >= u.seuil) {
         this.badgeUpgrades++;
+      }
+    }
+    for (let au of this.world.angelupgrades.pallier) {
+      if (!au.unlocked && this.world.activeangels >= au.seuil) {
+        this.badgeAngelUpgrades++;
       }
     }
   }
@@ -172,7 +186,3 @@ export class AppComponent {
    */
   claimAngels() {}
 }
-
-
-
-
