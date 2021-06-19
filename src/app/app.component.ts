@@ -111,6 +111,7 @@ export class AppComponent {
     this.world.products.product[manager.idcible - 1].managerUnlocked = true;
     this.popMessage('Félicitations ! ' + manager.name + ' a été embauché !');
     this.calcBadges();
+    this.service.putManager(manager);
   }
 
   buyUpgrade(upgrade: Pallier) {
@@ -119,6 +120,7 @@ export class AppComponent {
       upgrade.name + ' ' + upgrade.typeratio + ' x' + upgrade.ratio
     );
     this.spreadUpgrade(upgrade);
+    this.service.putUpgrade(upgrade);
   }
 
   buyAngelUpgrade(upgrade: Pallier) {
@@ -127,6 +129,7 @@ export class AppComponent {
       upgrade.name + ' ' + upgrade.typeratio + ' x' + upgrade.ratio
     );
     this.spreadUpgrade(upgrade);
+    this.service.putAngelUpgrade(upgrade);
   }
 
   spreadUpgrade(upgrade: Pallier) {
