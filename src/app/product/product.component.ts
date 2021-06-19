@@ -119,6 +119,10 @@ export class ProductComponent implements OnInit {
 
   buy() {
     this._product.quantite += this.nbCanBuy;
+    this._product.cout =
+      (this._product.cout *
+        (1 - Math.pow(this._product.croissance, this._product.quantite))) /
+      (1 - this._product.croissance);
     for (let unlock of this._product.palliers.pallier) {
       if (this._product.quantite >= unlock.seuil && !unlock.unlocked) {
         unlock.unlocked = true;
