@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Pallier, Product } from 'src/app/world';
+import { RestserviceService } from '../restservice.service';
 
 @Component({
   selector: 'app-product',
@@ -18,7 +19,10 @@ export class ProductComponent implements OnInit {
   nbCanBuy: number;
   isDisabled: boolean;
 
-  constructor(private snackBar: MatSnackBar) {}
+  constructor(
+    private service: RestserviceService,
+    private snackBar: MatSnackBar
+  ) {}
 
   @Input()
   set prod(value: Product) {
@@ -108,7 +112,7 @@ export class ProductComponent implements OnInit {
         );
         this.neededMoney =
           this._product.cout *
-          Math.pow(this._product.croissance, this._product.quantite);
+          Math.pow(this._product.croissance, this.nbCanBuy);
         break;
       default:
         break;
@@ -153,6 +157,9 @@ export class ProductComponent implements OnInit {
     if (this._product.timeleft === 0) {
       this._product.timeleft = this._product.vitesse;
       this.lastUpdate = Date.now();
+      if (!this._product.managerUnlocked) {
+        this.service.putProduct(this._product);
+      }
     }
   }
 
