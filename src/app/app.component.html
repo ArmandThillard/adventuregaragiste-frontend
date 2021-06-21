@@ -18,9 +18,6 @@
     </button>
   </div>
 
-  <div class="logo">
-    <span><img [attr.src]="server + world.logo" /></span>
-  </div>
   <div class="container2">
     <div class="bandeau">
       <ul>
@@ -246,50 +243,51 @@
       </div>
     </mat-dialog-content>
 
-  <mat-dialog-actions align="end">
-    <button mat-button matDialogClose color="primary">Fermer</button>
-  </mat-dialog-actions>
-</ng-template>
+    <mat-dialog-actions align="end">
+      <button mat-button matDialogClose color="primary">Fermer</button>
+    </mat-dialog-actions>
+  </ng-template>
 
-<ng-template #angelUpgrades>
-  <h2 matDialogTitle>Spend your Angels wisely!</h2>
+  <ng-template #angelUpgrades>
+    <h2 matDialogTitle>Spend your Angels wisely!</h2>
 
-  <mat-dialog-content>
-    <div *ngFor="let angelUpgrade of world.angelupgrades.pallier">
-      <div *ngIf="!angelUpgrade.unlocked" class="managerslayout">
-        <div class="one">
-          <img class="round" [attr.src]="server + angelUpgrade.logo" />
-        </div>
+    <mat-dialog-content>
+      <div *ngFor="let angelUpgrade of world.angelupgrades.pallier">
+        <div *ngIf="!angelUpgrade.unlocked" class="managerslayout">
+          <div class="one">
+            <img class="round" [attr.src]="server + angelUpgrade.logo" />
+          </div>
 
-        <div class="two">
-          <b>Angel : </b>{{ angelUpgrade.name }} <br />
-          <span *ngIf="angelUpgrade.idcible == -1">
-            Angels effectiveness +{{ angelUpgrade.ratio }}%
-          </span>
-          <span *ngIf="angelUpgrade.idcible == 0">
-            All profits x{{ angelUpgrade.ratio }}
-          </span>
-          <span *ngIf="angelUpgrade.idcible > 0"
-            >{{ world.products.product[angelUpgrade.idcible - 1].name }} +{{
-              angelUpgrade.ratio
-            }} </span
-          ><br />
-          <b>Prix : </b
-          ><span [innerHtml]="angelUpgrade.seuil | bigvalue"></span> <br />
+          <div class="two">
+            <b>Angel : </b>{{ angelUpgrade.name }} <br />
+            <span *ngIf="angelUpgrade.idcible == -1">
+              Angels effectiveness +{{ angelUpgrade.ratio }}%
+            </span>
+            <span *ngIf="angelUpgrade.idcible == 0">
+              All profits x{{ angelUpgrade.ratio }}
+            </span>
+            <span *ngIf="angelUpgrade.idcible > 0"
+              >{{ world.products.product[angelUpgrade.idcible - 1].name }} +{{
+                angelUpgrade.ratio
+              }} </span
+            ><br />
+            <b>Prix : </b
+            ><span [innerHtml]="angelUpgrade.seuil | bigvalue"></span> <br />
 
-          <button
-            mat-raised-button
-            (click)="buyAngelUpgrade(angelUpgrade)"
-            [disabled]="angelUpgrade.seuil > world.activeangels"
-          >
-            Buy!
-          </button>
+            <button
+              mat-raised-button
+              (click)="buyAngelUpgrade(angelUpgrade)"
+              [disabled]="angelUpgrade.seuil > world.activeangels"
+            >
+              Buy!
+            </button>
+          </div>
         </div>
       </div>
-    </div>
-  </mat-dialog-content>
+    </mat-dialog-content>
 
-  <mat-dialog-actions align="end">
-    <button mat-button matDialogClose color="primary">Fermer</button>
-  </mat-dialog-actions>
-</ng-template>
+    <mat-dialog-actions align="end">
+      <button mat-button matDialogClose color="primary">Fermer</button>
+    </mat-dialog-actions>
+  </ng-template>
+</div>
