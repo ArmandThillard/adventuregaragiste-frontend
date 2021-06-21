@@ -156,7 +156,7 @@ export class ProductComponent implements OnInit {
   }
 
   startFabrication() {
-    if (this._product.timeleft === 0) {
+    if (this._product.timeleft === 0 && this._product.quantite > 0) {
       this._product.timeleft = this._product.vitesse;
       this.lastUpdate = Date.now();
       if (!this._product.managerUnlocked) {
