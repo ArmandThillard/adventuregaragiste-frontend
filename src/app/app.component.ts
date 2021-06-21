@@ -41,10 +41,10 @@ export class AppComponent {
     private dialog: MatDialog
   ) {
     this.server = service.server;
+    this.username = localStorage.getItem('username');
     service.getWorld().then((world) => {
       this.world = world;
     });
-    this.username = localStorage.getItem('username');
   }
 
   @ViewChild('secondDialog', { static: true }) secondDialog: TemplateRef<any>;
