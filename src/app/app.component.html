@@ -286,7 +286,7 @@
     <mat-dialog-content>
       <div class="two">
         <p>{{ world.totalangels }} Total angels</p>
-        <p>2% bonus per angel</p>
+        <p>{{ world.angelbonus }}% bonus per angel</p>
         <button class="angelbutton" mat-raisedbutton (click)="claimAngels()">
           {{ angelsToClaim }} angels to claim with restart
         </button>
