@@ -64,7 +64,10 @@ export class ProductComponent implements OnInit {
   @Output() notifyBuy: EventEmitter<number> = new EventEmitter<number>();
 
   calcScore() {
-    if (this._product.timeleft !== 0 || this._product.managerUnlocked) {
+    if (
+      this._product.timeleft !== 0 ||
+      (this._product.managerUnlocked && this._product.quantite > 0)
+    ) {
       let currentDate = Date.now();
       this._product.timeleft -= currentDate - this.lastUpdate;
       this.lastUpdate = currentDate;
@@ -152,11 +155,13 @@ export class ProductComponent implements OnInit {
         }
       }
     }
+    this.service.putProduct(this._product);
     this.notifyBuy.emit(this.neededMoney);
   }
 
   startFabrication() {
-    if (this._product.timeleft === 0) {
+    if (this._product.timeleft === 0 && this._product.quantite > 0) {
+      // if (this._product.timeleft === 0) {
       this._product.timeleft = this._product.vitesse;
       this.lastUpdate = Date.now();
       if (!this._product.managerUnlocked) {
