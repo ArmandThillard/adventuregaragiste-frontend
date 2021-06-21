@@ -101,7 +101,6 @@ export class AppComponent {
       product.quantite *
       product.revenu *
       (1 + (this.world.activeangels * this.world.angelbonus) / 100);
-    this.service.putProduct(product);
     this.calcBadges();
     this.calcAngels();
   }
