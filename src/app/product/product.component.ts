@@ -65,7 +65,9 @@ export class ProductComponent implements OnInit {
 
   calcScore() {
     if (this._product.timeleft !== 0 || this._product.managerUnlocked) {
-      this._product.timeleft -= Date.now() - this.lastUpdate;
+      let currentDate = Date.now();
+      this._product.timeleft -= currentDate - this.lastUpdate;
+      this.lastUpdate = currentDate;
       if (this._product.timeleft <= 0) {
         // On prévient le composant parent que ce produit a généré son revenu
         this.notifyProduction.emit(this._product);
