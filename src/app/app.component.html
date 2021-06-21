@@ -55,7 +55,7 @@
             [matBadge]="badgeManagers"
             [matBadgeHidden]="badgeManagers == 0"
             style="width: 150px; margin: 0 0 5px 0"
-            (click)="openDialogWithTemplateRef(myDialog2)"
+            (click)="openDialogWithTemplateRef(manager)"
           >
             Managers
           </button>
@@ -85,6 +85,8 @@
       ></app-product>
     </div>
   </div>
+
+  <!--
 
   <div *ngIf="showUnlocks" class="modal">
     <div>
@@ -204,37 +206,40 @@
   </div>
 </div>
 
-<ng-template #myDialog2>
-  <h2 matDialogTitle>Managers make you feel better !</h2>
+-->
 
-  <mat-dialog-content>
-    <div *ngFor="let manager of world.managers.pallier">
-      <div *ngIf="!manager.unlocked" class="managerslayout">
-        <div class="one">
-          <img class="round" [attr.src]="server + manager.logo" />
-        </div>
+  <ng-template #manager>
+    <h2 matDialogTitle>Managers make you feel better !</h2>
 
-        <div class="two">
-          <b>Manager : </b>{{ manager.name }} <br />
-          <b>Voiture : </b
-          >{{ world.products.product[manager.idcible - 1].name }}
-          <br />
-          <b>Prix : </b>{{ manager.seuil }} <br />
+    <mat-dialog-content>
+      <div *ngFor="let manager of world.managers.pallier">
+        <div *ngIf="!manager.unlocked" class="managerslayout">
+          <div class="one">
+            <img class="round" [attr.src]="server + manager.logo" />
+          </div>
 
-          <button
-            class="hirebutton"
-            mat-raisedbutton
-            (click)="hireManager(manager)"
-            [disabled]="manager.seuil > world.money"
-          >
-            Hire !
-          </button>
+          <div class="two">
+            <b>Manager : </b>{{ manager.name }} <br />
+            <b>Voiture : </b
+            >{{ world.products.product[manager.idcible - 1].name }}
+            <br />
+            <b>Prix : </b>{{ manager.seuil }} <br />
+
+            <button
+              class="hirebutton"
+              mat-raisedbutton
+              (click)="hireManager(manager)"
+              [disabled]="manager.seuil > world.money"
+            >
+              Hire !
+            </button>
+          </div>
         </div>
       </div>
-    </div>
-  </mat-dialog-content>
+    </mat-dialog-content>
 
-  <mat-dialog-actions align="end">
-    <button mat-button matDialogClose color="primary">Fermer</button>
-  </mat-dialog-actions>
-</ng-template>
+    <mat-dialog-actions align="end">
+      <button mat-button matDialogClose color="primary">Fermer</button>
+    </mat-dialog-actions>
+  </ng-template>
+</div>
