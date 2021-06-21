@@ -51,6 +51,28 @@ export class RestserviceService {
       .catch(this.handleError);
   }
 
+  public putAngelUpgrade(angelUpgrade: Pallier): Promise<Response> {
+    return this._http
+      .put(
+        this._server + 'adventuregaragiste/generic/angelupgrade',
+        angelUpgrade,
+        {
+          headers: this.setHeaders(this._user),
+        }
+      )
+      .toPromise()
+      .catch(this.handleError);
+  }
+
+  public putUpgrade(upgrade: Pallier): Promise<Response> {
+    return this._http
+      .put(this._server + 'adventuregaragiste/generic/upgrade', upgrade, {
+        headers: this.setHeaders(this._user),
+      })
+      .toPromise()
+      .catch(this.handleError);
+  }
+
   public get user(): string {
     return this._user;
   }

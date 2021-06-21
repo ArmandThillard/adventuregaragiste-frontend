@@ -119,11 +119,21 @@ export class ProductComponent implements OnInit {
 
   buy() {
     this._product.quantite += this.nbCanBuy;
+    this._product.cout =
+      (this._product.cout *
+        (1 - Math.pow(this._product.croissance, this._product.quantite))) /
+      (1 - this._product.croissance);
     for (let unlock of this._product.palliers.pallier) {
       if (this._product.quantite >= unlock.seuil && !unlock.unlocked) {
         unlock.unlocked = true;
         this.popMessage(
-          unlock.name + ' ' + unlock.typeratio + ' x' + unlock.ratio
+          unlock.name +
+            ' ' +
+            this._product.name +
+            ' ' +
+            unlock.typeratio +
+            ' x' +
+            unlock.ratio
         );
         switch (unlock.typeratio) {
           case 'vitesse':
@@ -149,14 +159,16 @@ export class ProductComponent implements OnInit {
   }
 
   callUpgrade(pallier: Pallier) {
-    console.log('callUpgrade called');
     switch (pallier.typeratio) {
       case 'vitesse':
         this._product.vitesse = this._product.vitesse / pallier.ratio;
         this._product.timeleft = this._product.timeleft / pallier.ratio;
         break;
-      case 'revenu':
+      case 'gain':
         this._product.revenu = this._product.revenu * pallier.ratio;
+        break;
+      case 'quantite':
+        this._product.quantite += pallier.ratio;
         break;
       default:
         break;

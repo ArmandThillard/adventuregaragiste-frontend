@@ -12,7 +12,7 @@
       class="progressbar"
       [value]="progressBarValue"
     ></mat-progress-bar>
-    <div class="money2">{{ product.cout }}</div>
+    <div class="money2" [innerHTML]="product.cout | bigvalue"></div>
   </div>
 
   <div class="number">
@@ -22,11 +22,11 @@
       (click)="buy()"
       style="width: 100px; overflow: hidden"
     >
-      Buy x{{ nbCanBuy }} : {{ neededMoney }}
+      Buy x{{ nbCanBuy }} : <span [innerHtml]="neededMoney | bigvalue"></span>
     </button>
   </div>
 
-  <div class="time">{{ product.vitesse }}</div>
+  <div class="time" [innerHtml]="product.vitesse | time"></div>
 </div>
 
 <!--<div class="number">{{ product.quantite }}</div> -->
