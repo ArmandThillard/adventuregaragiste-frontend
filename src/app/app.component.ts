@@ -42,6 +42,7 @@ export class AppComponent {
   ) {
     this.server = service.server;
     this.username = localStorage.getItem('username');
+    this.service.user = this.username;
     service.getWorld().then((world) => {
       this.world = world;
     });
