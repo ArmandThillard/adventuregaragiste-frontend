@@ -5,7 +5,7 @@
       [attr.src]="server + product.logo"
       (click)="startFabrication()"
     />
-    <div class="numberproduct" [innerHTML]="product.quantite | bigvalue"></div>
+    <div class="numberproduct" [innerHTML]="product.quantite"></div>
   </div>
 
   <div class="money">
@@ -21,9 +21,10 @@
       mat-raised-button
       [disabled]="isDisabled"
       (click)="buy()"
-      style="width: 100px; overflow: hidden"
+      style="width: 100px; overflow: hidden; text-align: center"
     >
-      Buy x{{ nbCanBuy }} : <span [innerHtml]="neededMoney | bigvalue"></span>
+      Buy x{{ nbCanBuy }} :
+      <span [innerHtml]="neededMoney | bigvalue"></span>
     </button>
   </div>
 

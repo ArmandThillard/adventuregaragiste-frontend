@@ -25,7 +25,7 @@
           <button
             mat-raised-button
             color="primary"
-            (click)="showUnlocks = true"
+            (click)="openDialogWithTemplateRef(unlocks)"
             style="width: 150px; margin: 0 0 5px 0"
           >
             Unlocks
@@ -36,7 +36,7 @@
             mat-raised-button
             [matBadge]="badgeUpgrades"
             [matBadgeHidden]="badgeUpgrades == 0"
-            (click)="showUpgrades = true"
+            (click)="openDialogWithTemplateRef(cashupgrade)"
             style="width: 150px; margin: 0 0 5px 0"
           >
             Cash Upgrades
@@ -65,11 +65,12 @@
             Managers
           </button>
         </li>
+
         <li>
           <button
             mat-raised-button
-            (click)="showInvestors = true"
             style="width: 150px; margin: 0 0 5px 0"
+            (click)="openDialogWithTemplateRef(investor)"
           >
             Investors
           </button>
@@ -93,102 +94,7 @@
 
   <!--
 
-  <div *ngIf="showUnlocks" class="modal">
-    <div>
-      <h1 class="title">
-        Want to maximize profits? Get your investments to these quotas!
-      </h1>
-    </div>
-    <div>
-      <div *ngFor="let product of world.products.product">
-        <div *ngFor="let unlock of product.palliers.pallier">
-          <div *ngIf="!unlock.unlocked" class="unlockslayout">
-            <div>
-              <div class="logo">
-                <img class="round" [attr.src]="server + unlock.logo" />
-              </div>
-            </div>
-            <div>
-              <div class="unlockname">{{ unlock.name }}</div>
-              <div class="unlockcible">
-                {{ world.products.product[unlock.idcible - 1].name }}
-              </div>
-              <div>{{ unlock.typeratio }} x {{ unlock.ratio }}</div>
-              <div class="unlockscost">{{ unlock.seuil }}</div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div *ngFor="let unlock of world.allunlocks.pallier">
-        <div *ngIf="!unlock.unlocked" class="unlockslayout">
-          <div>
-            <div class="logo">
-              <img class="round" [attr.src]="server + unlock.logo" />
-            </div>
-          </div>
-          <div>
-            <div class="unlockname">{{ unlock.name }}</div>
-            <div class="unlockcible">
-              {{ world.products.product[unlock.idcible - 1].name }}
-            </div>
-            <div>{{ unlock.typeratio }} x {{ unlock.ratio }}</div>
-            <div class="unlockscost">{{ unlock.seuil }}</div>
-          </div>
-        </div>
-      </div>
-      <button
-        class="closebutton"
-        mat-raisedbutton
-        color="primary"
-        (click)="showUnlocks = !showUnlocks"
-      >
-        Close
-      </button>
-    </div>
-  </div>
-
-  <div *ngIf="showUpgrades" class="modal">
-    <div>
-      <h1 class="title">Boost your investments!</h1>
-    </div>
-    <div>
-      <div *ngFor="let upgrade of world.upgrades.pallier">
-        <div *ngIf="!upgrade.unlocked" class="upgradelayout">
-          <div>
-            <div class="logo">
-              <img class="round" [attr.src]="server + upgrade.logo" />
-            </div>
-          </div>
-          <div>
-            <div class="upgradename">{{ upgrade.name }}</div>
-            <div class="upgradecible">
-              {{ world.products.product[upgrade.idcible - 1].name }}
-            </div>
-            <div>{{ upgrade.typeratio }} x {{ upgrade.ratio }}</div>
-            <div class="upgradescost">{{ upgrade.seuil }}</div>
-            <div>
-              <button
-                class="upgradebutton"
-                mat-raisedbutton
-                (click)="buyUpgrade(upgrade)"
-                [disabled]="upgrade.seuil > world.money"
-              >
-                Buy!
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <button
-      class="closebutton"
-      mat-raisedbutton
-      color="primary"
-      (click)="showUpgrades = !showUpgrades"
-    >
-      Close
-    </button>
-  </div>
+  
   <div *ngIf="showInvestors" class="modal">
     <div>
       <h1 class="title">Angel investors</h1>
@@ -290,4 +196,129 @@
       <button mat-button matDialogClose color="primary">Fermer</button>
     </mat-dialog-actions>
   </ng-template>
+
+  <ng-template #unlocks>
+    <h2 matDialogTitle>
+      Want to maximize profits? Get your investments to these quotas!
+    </h2>
+
+    <mat-dialog-content>
+      <div *ngFor="let product of world.products.product">
+        <div *ngFor="let unlock of product.palliers.pallier">
+          <div *ngIf="!unlock.unlocked" class="managerslayout">
+            <div class="one">
+              <img class="round" [attr.src]="server + unlock.logo" />
+            </div>
+
+            <div class="two">
+              <b>Unlock : </b>{{ unlock.name }}<br />
+              <b>Voiture : </b
+              >{{ world.products.product[unlock.idcible - 1].name }}
+              <br />
+              <b>Ratio : </b>{{ unlock.typeratio }} x {{ unlock.ratio }} <br />
+              <b>Seuil : </b>{{ unlock.seuil }}<br />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div *ngFor="let unlock of world.allunlocks.pallier">
+        <div *ngIf="!unlock.unlocked" class="managerslayout">
+          <div class="one">
+            <img class="round" [attr.src]="server + unlock.logo" />
+          </div>
+
+          <div class="two">
+            <b>Unlock : </b>{{ unlock.name }}<br />
+            <b>Voiture : </b
+            >{{ world.products.product[unlock.idcible - 1].name }}
+            <br />
+            <b>Ratio : </b>{{ unlock.typeratio }} x {{ unlock.ratio }} <br />
+            <b>Seuil : </b>{{ unlock.seuil }}<br />
+          </div>
+        </div>
+      </div>
+    </mat-dialog-content>
+
+    <mat-dialog-actions align="end">
+      <button mat-button matDialogClose color="primary">Fermer</button>
+    </mat-dialog-actions>
+  </ng-template>
+
+  <ng-template #cashupgrade>
+    <h2 matDialogTitle>Boost your investments!</h2>
+
+    <mat-dialog-content>
+      <div *ngFor="let upgrade of world.upgrades.pallier">
+        <div *ngIf="!upgrade.unlocked" class="managerslayout">
+          <div class="one">
+            <img class="round" [attr.src]="server + upgrade.logo" />
+          </div>
+
+          <div class="two">
+            <b>Upgrade : </b>{{ upgrade.name }} <br />
+            <b>Voiture : </b
+            >{{ world.products.product[upgrade.idcible - 1].name }}
+            <br />
+            <b>Ratio : </b>{{ upgrade.typeratio }} x {{ upgrade.ratio }}<br />
+            <b>Coût : </b>{{ upgrade.seuil }}<br />
+
+            <button
+              class="upgradebutton"
+              mat-raisedbutton
+              (click)="buyUpgrade(upgrade)"
+              [disabled]="upgrade.seuil > world.money"
+            >
+              Buy!
+            </button>
+          </div>
+        </div>
+      </div>
+    </mat-dialog-content>
+
+    <mat-dialog-actions align="end">
+      <button mat-button matDialogClose color="primary">Fermer</button>
+    </mat-dialog-actions>
+  </ng-template>
+
+  <ng-template #investor>
+    <h2 matDialogTitle>Angel investors</h2>
+
+    <mat-dialog-content>
+      <div class="two">
+        <p>{{ world.totalangels }} Total angels</p>
+        <p>2% bonus per angel</p>
+        <button class="angelbutton" mat-raisedbutton (click)="claimAngels()">
+          {{ angelsToClaim }} angels to claim with restart
+        </button>
+      </div>
+    </mat-dialog-content>
+
+    <mat-dialog-actions align="end">
+      <button mat-button matDialogClose color="primary">Fermer</button>
+    </mat-dialog-actions>
+  </ng-template>
 </div>
+<!--
+
+  
+  <div *ngIf="showInvestors" class="modal">
+    <div>
+      <h1 class="title">Angel investors</h1>
+    </div>
+    <div>
+      <p>{{ world.totalangels }} Total angels</p>
+      <p>2% bonus per angel</p>
+      <button class="angelbutton" mat-raisedbutton (click)="claimAngels()">
+        {{ angelsToClaim }} angels to claim with restart
+      </button>
+    </div>
+    <button
+      class="closebutton"
+      mat-raisedbutton
+      color="primary"
+      (click)="showInvestors = !showInvestors"
+    >
+      Close
+    </button>
+  </div>
+</div> -->
