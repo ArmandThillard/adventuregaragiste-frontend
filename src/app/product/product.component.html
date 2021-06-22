@@ -8,12 +8,16 @@
     <div class="numberproduct" [innerHTML]="product.quantite"></div>
   </div>
 
-  <div class="money">
+  <div *ngIf="product.vitesse > 150" class="money">
     <mat-progress-bar
       class="progressbar"
       [value]="progressBarValue"
     ></mat-progress-bar>
-    <div class="money2" [innerHTML]="product.revenu | bigvalue"></div>
+    <div class="money2" [innerHtml]="product.timeleft | time"></div>
+  </div>
+  <div *ngIf="product.vitesse < 150" class="money">
+    <mat-progress-bar class="progressbar" mode="buffer"></mat-progress-bar>
+    <div class="money2" [innerHTML]="product.vitesse | time"></div>
   </div>
 
   <div class="number">
@@ -32,7 +36,9 @@
     </button>
   </div>
 
-  <div class="time" [innerHtml]="product.vitesse | time"></div>
+  <div class="time">
+    Revenu : {{ product.revenu * product.quantite | bigvalue }}
+  </div>
 </div>
 
 <!--<div class="number">{{ product.quantite }}</div> -->
