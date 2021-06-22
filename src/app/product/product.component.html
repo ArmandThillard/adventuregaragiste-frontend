@@ -21,10 +21,14 @@
       mat-raised-button
       [disabled]="isDisabled"
       (click)="buy()"
-      style="width: 100px; overflow: hidden; text-align: center"
+      style="
+        width: 100px;
+        overflow: hidden;
+        text-align: center;
+        padding: 0px 0px 0px 0px;
+      "
     >
-      Buy x{{ nbCanBuy }} :
-      <span [innerHtml]="neededMoney | bigvalue"></span>
+      Buy x{{ nbCanBuy }} : {{ neededMoney | bigvalue }}
     </button>
   </div>
 
