@@ -4,7 +4,7 @@
   border-radius: 50px;
   width: 100%;
   grid-template-columns: 0.6fr 1fr 1fr;
-  grid-template-rows: 0.8fr 0.9fr;
+  grid-template-rows: 50px 50px;
   gap: 0px 0px;
   grid-template-areas:
     "logo money money"
@@ -14,11 +14,6 @@
   overflow: hidden;
 
   font-size: larger;
-}
-
-.logo {
-  grid-area: logo;
-  position: relative;
 }
 
 .money {
@@ -40,7 +35,15 @@
   grid-area: time;
 }
 
+.logo {
+  grid-area: logo;
+  position: relative;
+}
+
 .logoprod {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100px;
   height: 100px;
   border-radius: 50%;
@@ -52,7 +55,7 @@
   height: 20px;
   background-color: white;
   left: 20%;
-  top: -30px;
+  top: 70px;
   border-radius: 10%;
   text-align: center;
 }
