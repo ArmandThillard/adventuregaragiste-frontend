@@ -45,6 +45,8 @@ export class AppComponent {
     this.service.user = this.username;
     service.getWorld().then((world) => {
       this.world = world;
+      this.calcAngels();
+      this.calcBadges();
     });
   }
 
@@ -191,5 +193,12 @@ export class AppComponent {
    * @todo appeler l'API Rest pour reset le monde
    * Mettre à jour les propriétés totalangels
    */
-  claimAngels() {}
+  claimAngels() {
+    this.service.deleteWorld();
+    this.service.getWorld().then((world) => {
+      this.world = world;
+      this.calcAngels();
+      this.calcBadges();
+    });
+  }
 }

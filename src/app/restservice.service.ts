@@ -73,6 +73,15 @@ export class RestserviceService {
       .catch(this.handleError);
   }
 
+  public deleteWorld(): Promise<Response> {
+    return this._http
+      .delete(this._server + 'adventuregaragiste/generic/world', {
+        headers: this.setHeaders(this._user),
+      })
+      .toPromise()
+      .catch(this.handleError);
+  }
+
   public get user(): string {
     return this._user;
   }
