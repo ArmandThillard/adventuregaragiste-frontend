@@ -43,6 +43,7 @@ export class AppComponent {
     this.server = service.server;
     this.username = localStorage.getItem('username');
     this.service.user = this.username;
+    this.playAudio();
     service.getWorld().then((world) => {
       this.world = world;
       this.calcAngels();
@@ -62,7 +63,11 @@ export class AppComponent {
   onUsernameChanged() {
     localStorage.setItem('username', this.username);
     this.service.user = this.username;
-    this.service.getWorld();
+    this.service.getWorld().then((world) => {
+      this.world = world;      
+      this.calcAngels();
+      this.calcBadges();
+    });    
   }
 
   onBuy(cost: number) {
@@ -201,4 +206,13 @@ export class AppComponent {
       this.calcBadges();
     });
   }
+  
+playAudio(){
+  let audio = new Audio();
+  audio.src = "http://localhost:8081/icones/musique2.mp3";
+  audio.load();
+  audio.play();
 }
+}
+
+

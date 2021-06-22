@@ -3,7 +3,7 @@
   border: 2px inset rgba(59, 64, 66, 0.9);
   border-radius: 50px;
   width: 100%;
-  grid-template-columns: 0.6fr 1fr 1fr;
+  grid-template-columns: 0.6fr 0.6fr 1fr;
   grid-template-rows: 50px 50px;
   gap: 0px 0px;
   grid-template-areas:
@@ -23,16 +23,19 @@
 
 .money2 {
   position: relative;
-  left: 40%;
+  left: 10%;
   top: 20%;
+  color: aliceblue;
 }
 
 .number {
   grid-area: number;
+  left: 0;
 }
 
 .time {
   grid-area: time;
+  color: aliceblue;
 }
 
 .logo {
