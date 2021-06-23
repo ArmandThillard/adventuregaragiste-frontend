@@ -269,7 +269,8 @@
         <p>{{ world.totalangels }} Total angels</p>
         <p>{{ world.angelbonus }}% bonus per angel</p>
         <button class="angelbutton" mat-raisedbutton (click)="claimAngels()">
-          {{ angelsToClaim }} angels to claim with restart
+          <span [innerHTML]="angelsToClaim | bigvalue"></span> angels to claim
+          with restart
         </button>
       </div>
     </mat-dialog-content>
@@ -279,27 +280,3 @@
     </mat-dialog-actions>
   </ng-template>
 </div>
-<!--
-
-  
-  <div *ngIf="showInvestors" class="modal">
-    <div>
-      <h1 class="title">Angel investors</h1>
-    </div>
-    <div>
-      <p>{{ world.totalangels }} Total angels</p>
-      <p>2% bonus per angel</p>
-      <button class="angelbutton" mat-raisedbutton (click)="claimAngels()">
-        {{ angelsToClaim }} angels to claim with restart
-      </button>
-    </div>
-    <button
-      class="closebutton"
-      mat-raisedbutton
-      color="primary"
-      (click)="showInvestors = !showInvestors"
-    >
-      Close
-    </button>
-  </div>
-</div> -->
