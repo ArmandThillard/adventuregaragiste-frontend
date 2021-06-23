@@ -9,7 +9,7 @@ export class BigvaluePipe implements PipeTransform {
     if (value < 1000) res = value.toFixed(0);
     else if (value < 1000000) res = value.toFixed(0);
     else if (value >= 1000000) {
-      res = value.toPrecision(4);
+      res = value.toPrecision(2);
       res = res.replace(/e\+(.*)/, ' 10<sup>$1</sup>');
     }
     return res;

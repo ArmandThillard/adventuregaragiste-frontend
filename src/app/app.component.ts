@@ -209,7 +209,8 @@ export class AppComponent {
   
 playAudio(){
   let audio = new Audio();
-  audio.src = "http://localhost:8081/icones/musique2.mp3";
+  audio.src = "http://localhost:8081/icones/musique4.mp3";
+  audio.loop = true;
   audio.load();
   audio.play();
 }
