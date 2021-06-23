@@ -15,7 +15,7 @@
     ></mat-progress-bar>
     <div class="money2" [innerHtml]="product.timeleft | time"></div>
   </div>
-  <div *ngIf="product.vitesse < 150" class="money">
+  <div *ngIf="product.vitesse < 150 && product.managerUnlocked" class="money">
     <mat-progress-bar class="progressbar" mode="buffer"></mat-progress-bar>
     <div class="money2" [innerHTML]="product.vitesse | time"></div>
   </div>
@@ -32,12 +32,13 @@
         padding: 0px 0px 0px 0px;
       "
     >
-      Buy x{{ nbCanBuy }} : {{ neededMoney | bigvalue }}
+      Buy x{{ nbCanBuy }} : <span [innerHTML]="neededMoney | bigvalue"></span>
     </button>
   </div>
 
   <div class="time">
-    Revenu : {{ product.revenu * product.quantite | bigvalue }}
+    Revenu :
+    <span [innerHTML]="product.revenu * product.quantite | bigvalue"></span>
   </div>
 </div>
 
