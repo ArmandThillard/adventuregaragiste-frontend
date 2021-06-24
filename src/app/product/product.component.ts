@@ -93,19 +93,24 @@ export class ProductComponent implements OnInit {
     switch (this._multiplier) {
       case 'x1':
         this.nbCanBuy = 1;
-        this.neededMoney = this._product.cout;
+        this.neededMoney =
+          (this._product.cout *
+            (1 - Math.pow(this._product.croissance, this.nbCanBuy))) /
+          (1 - this._product.croissance);
         break;
       case 'x10':
         this.nbCanBuy = 10;
         this.neededMoney =
-          this._product.cout *
-          Math.pow(this._product.croissance, this.nbCanBuy);
+          (this._product.cout *
+            (1 - Math.pow(this._product.croissance, this.nbCanBuy))) /
+          (1 - this._product.croissance);
         break;
       case 'x100':
         this.nbCanBuy = 100;
         this.neededMoney =
-          this._product.cout *
-          Math.pow(this._product.croissance, this.nbCanBuy);
+          (this._product.cout *
+            (1 - Math.pow(this._product.croissance, this.nbCanBuy))) /
+          (1 - this._product.croissance);
         break;
       case 'xMax':
         this.nbCanBuy = Math.trunc(
@@ -116,8 +121,9 @@ export class ProductComponent implements OnInit {
           ) / Math.log(this._product.croissance)
         );
         this.neededMoney =
-          this._product.cout *
-          Math.pow(this._product.croissance, this.nbCanBuy);
+          (this._product.cout *
+            (1 - Math.pow(this._product.croissance, this.nbCanBuy))) /
+          (1 - this._product.croissance);
         break;
       default:
         break;
@@ -128,8 +134,7 @@ export class ProductComponent implements OnInit {
   buy() {
     this._product.quantite += this.nbCanBuy;
     this._product.cout =
-      this._product.cout *
-      Math.pow(this._product.croissance, this._product.quantite);
+      this._product.cout * Math.pow(this._product.croissance, this.nbCanBuy);
     for (let unlock of this._product.palliers.pallier) {
       if (this._product.quantite >= unlock.seuil && !unlock.unlocked) {
         unlock.unlocked = true;
@@ -142,17 +147,7 @@ export class ProductComponent implements OnInit {
             ' x' +
             unlock.ratio
         );
-        switch (unlock.typeratio) {
-          case 'vitesse':
-            this._product.vitesse = this._product.vitesse / unlock.ratio;
-            this._product.timeleft = this._product.timeleft / unlock.ratio;
-            break;
-          case 'revenu':
-            this._product.revenu = this._product.revenu * unlock.ratio;
-            break;
-          default:
-            break;
-        }
+        this.callUpgrade(unlock);
       }
     }
     this.service.putProduct(this._product);
@@ -161,7 +156,6 @@ export class ProductComponent implements OnInit {
 
   startFabrication() {
     if (this._product.timeleft === 0 && this._product.quantite > 0) {
-      // if (this._product.timeleft === 0) {
       this._product.timeleft = this._product.vitesse;
       this.lastUpdate = Date.now();
       if (!this._product.managerUnlocked) {
