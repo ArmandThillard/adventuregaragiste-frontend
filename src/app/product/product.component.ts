@@ -147,17 +147,7 @@ export class ProductComponent implements OnInit {
             ' x' +
             unlock.ratio
         );
-        switch (unlock.typeratio) {
-          case 'vitesse':
-            this._product.vitesse = this._product.vitesse / unlock.ratio;
-            this._product.timeleft = this._product.timeleft / unlock.ratio;
-            break;
-          case 'revenu':
-            this._product.revenu = this._product.revenu * unlock.ratio;
-            break;
-          default:
-            break;
-        }
+        this.callUpgrade(unlock);
       }
     }
     this.service.putProduct(this._product);
