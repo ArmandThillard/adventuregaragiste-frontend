@@ -36,6 +36,7 @@
 .time {
   grid-area: time;
   color: aliceblue;
+  text-align: center;
 }
 
 .logo {
@@ -67,4 +68,8 @@ mat-progress-bar {
   height: 40px;
   position: absolute;
   border-radius: 5px;
+}
+
+::ng-deep .mat-progress-bar-fill::after {
+  background-color: #9b9a9a;
 }

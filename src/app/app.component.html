@@ -115,11 +115,12 @@
             <b>Voiture : </b
             >{{ world.products.product[manager.idcible - 1].name }}
             <br />
-            <b>Prix : </b>{{ manager.seuil }} <br />
+            <b>Prix : </b><span [innerHtml]="manager.seuil | bigvalue"></span>
+            <br />
 
             <button
               class="hirebutton"
-              mat-raisedbutton
+              mat-raised-button
               (click)="hireManager(manager)"
               [disabled]="manager.seuil > world.money"
             >
@@ -210,9 +211,6 @@
 
           <div class="two">
             <b>Unlock : </b>{{ unlock.name }}<br />
-            <b>Voiture : </b
-            >{{ world.products.product[unlock.idcible - 1].name }}
-            <br />
             <b>Ratio : </b>{{ unlock.typeratio }} x {{ unlock.ratio }} <br />
             <b>Seuil : </b>{{ unlock.seuil }}<br />
           </div>
@@ -241,11 +239,12 @@
             >{{ world.products.product[upgrade.idcible - 1].name }}
             <br />
             <b>Ratio : </b>{{ upgrade.typeratio }} x {{ upgrade.ratio }}<br />
-            <b>Coût : </b>{{ upgrade.seuil }}<br />
+            <b>Coût : </b><span [innerHtml]="upgrade.seuil | bigvalue"></span>
+            <br />
 
             <button
               class="upgradebutton"
-              mat-raisedbutton
+              mat-raised-button
               (click)="buyUpgrade(upgrade)"
               [disabled]="upgrade.seuil > world.money"
             >
@@ -268,7 +267,7 @@
       <div class="two">
         <p>{{ world.totalangels }} Total angels</p>
         <p>{{ world.angelbonus }}% bonus per angel</p>
-        <button class="angelbutton" mat-raisedbutton (click)="claimAngels()">
+        <button class="angelbutton" mat-raised-button (click)="claimAngels()">
           <span [innerHTML]="angelsToClaim | bigvalue"></span> angels to claim
           with restart
         </button>

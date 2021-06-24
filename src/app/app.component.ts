@@ -64,10 +64,10 @@ export class AppComponent {
     localStorage.setItem('username', this.username);
     this.service.user = this.username;
     this.service.getWorld().then((world) => {
-      this.world = world;      
+      this.world = world;
       this.calcAngels();
       this.calcBadges();
-    });    
+    });
   }
 
   onBuy(cost: number) {
@@ -206,14 +206,12 @@ export class AppComponent {
       this.calcBadges();
     });
   }
-  
-playAudio(){
-  let audio = new Audio();
-  audio.src = "http://localhost:8081/icones/musique4.mp3";
-  audio.loop = true;
-  audio.load();
-  audio.play();
-}
-}
 
-
+  playAudio() {
+    let audio = new Audio();
+    audio.src = 'http://localhost:8081/icones/musique4.mp3';
+    audio.loop = true;
+    audio.load();
+    audio.play();
+  }
+}
