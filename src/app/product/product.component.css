@@ -36,6 +36,7 @@
 .time {
   grid-area: time;
   color: aliceblue;
+  text-align: center;
 }
 
 .logo {
