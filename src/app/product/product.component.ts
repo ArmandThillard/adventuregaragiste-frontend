@@ -18,6 +18,7 @@ export class ProductComponent implements OnInit {
   neededMoney: number;
   nbCanBuy: number;
   isDisabled: boolean;
+  private _angelsBonus: number;
 
   constructor(
     private service: RestserviceService,
@@ -56,6 +57,15 @@ export class ProductComponent implements OnInit {
   @Input()
   set money(value: number) {
     this._money = value;
+  }
+
+  get angelsBonus() {
+    return this._angelsBonus;
+  }
+
+  @Input()
+  set angelsBonus(value: number) {
+    this._angelsBonus = value;
   }
 
   @Output() notifyProduction: EventEmitter<Product> =

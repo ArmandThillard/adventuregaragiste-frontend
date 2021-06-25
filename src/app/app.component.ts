@@ -25,6 +25,7 @@ export class AppComponent {
   showInvestors = false;
   angelsToClaim = 0;
   badgeAngelUpgrades = 0;
+  angelsBonus = 0;
 
   @ViewChildren(ProductComponent)
   productsComponent: QueryList<ProductComponent>;
@@ -100,10 +101,9 @@ export class AppComponent {
   }
 
   onProductionDone(product: Product) {
-    this.world.money +=
-      product.quantite *
-      product.revenu *
-      (1 + (this.world.activeangels * this.world.angelbonus) / 100);
+    this.angelsBonus =
+      1 + (this.world.activeangels * this.world.angelbonus) / 100;
+    this.world.money += product.quantite * product.revenu * this.angelsBonus;
     this.world.score +=
       product.quantite *
       product.revenu *
