@@ -38,6 +38,8 @@
 
   <div class="time">
     Revenu :
-    <span [innerHTML]="product.revenu * product.quantite | bigvalue"></span>
+    <span
+      [innerHTML]="product.revenu * product.quantite * angelsBonus | bigvalue"
+    ></span>
   </div>
 </div>
